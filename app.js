@@ -46,7 +46,9 @@ client.on('message', async message => {
         message.delete()
         return message.reply("aguarde 5 segundos para executar um novo comando.").then(msg => msg.delete(5000))
     }
-    cooldown.add(message.author.id)
+    if(!message.member.roles.find(role => role.name === "Administrador") || message.member.roles.find(role => role.name === "Moderador")) {
+        cooldown.add(message.author.id)
+    }
     var messageArray = message.content.split(" ");
     var cmd = messageArray[0].toLowerCase();
     var args = messageArray.slice(1);
