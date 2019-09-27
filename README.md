@@ -19,7 +19,9 @@ Se tudo estiver certo, crie um arquivo com o nome de **config.json** seguindo o 
 
 Depois de tudo configurado é só usar o comando
 
-```$ node app.js```
+```
+$ node app.js
+```
 
 Caso apareça a lista de comandos sendo carregada e após isso a seguinte mensagem, o BOT já estara funcionando.
 
