@@ -1,0 +1,15 @@
+{
+    "prefix": "!",
+    "cor": "#36393f",
+    "token": "your token goes here",
+    "db": "your mongo db link goes here",
+    "ownerID": "260182264963399681",
+    "reportsChannel": "🚨  denuncias",
+    "greetingChannel": "622162639484616734",
+    "guildID": "622160862605737990",
+    "rulesChannel": "622163725276938241",
+    "logChannel": "622195416179671042",
+    "punishChannel": "622533809455497257",
+    "GOOGLE_API_KEY": "your yt api key goes here",
+    "newsChannel": "622164725664317450"
+}
