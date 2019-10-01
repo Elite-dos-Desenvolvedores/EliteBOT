@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client();
 const config = require('./comandos/config.json')
 
-mongoose.connect('config.db', {
+mongoose.connect(config.db , {
     useNewUrlParser: true
 }, (err) => {
     if (err) return console.log(`Erro ao conectar no database!\n${err}`)

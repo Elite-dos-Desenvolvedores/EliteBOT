@@ -2,15 +2,16 @@ const Discord = require('discord.js')
 const c = require('../config.json')
 exports.run = async (client, message, args) => {
     await message.author.createDM
-    const vv = client.emojis.find("name", "checked")
-    const xx = client.emojis.find("name", "unchecked")
+
+    const vv = client.emojis.find("name", "vv")
+    const xx = client.emojis.find("name", "xx")
     message.delete()
     message.channel.send(`${message.author}, informações do seu pedido foi enviada a sua DM.`).then(msg => msg.delete(5000))
 
     const embed = new Discord.RichEmbed()
         .setColor(c.cor)
         .setAuthor("EdD - Pedidos", client.user.avatarURL)
-        .setDescription("⠀\nDigite o nome do seu projeto. ``` ```")
+        .setDescription("⠀\nProjetos a serem feitos. ``` ```")
         .setFooter("© EdD", message.author.avatarURL)
 
 
@@ -28,7 +29,7 @@ exports.run = async (client, message, args) => {
                 .setAuthor("EdD - Pedidos", client.user.avatarURL)
                 .setDescription("⠀\nDigite o resumo do seu projeto. ``` ```")
                 .addField("Pedido em progresso.", `
-\`📡\` Nome do projeto: ${nome}
+\`📡\` Projetos: ${nome}
 `)
                 .setFooter("© EdD", message.author.avatarURL)
             msg.edit(embedb)
@@ -42,20 +43,18 @@ exports.run = async (client, message, args) => {
                 const embedc = new Discord.RichEmbed()
                     .setColor(c.cor)
                     .setAuthor("EdD - Pedidos", client.user.avatarURL)
-                    .setDescription("⠀\nDigite um valor estimado que você deseja pagar pelo projeto.. ``` ```")
+                    .setDescription("⠀\nQual será o salário mensal. ``` ```")
                     .addField("Pedido em progresso.", `
-\`📡\` Nome do projeto: ${nome}
-\`💡\` Resumo do projeto: ${resumo}`)
+\`📡\` Projetos: ${nome}
+\`💡\` Resumo do projetos: ${resumo}`)
                     .setFooter("© EdD", message.author.avatarURL)
                 msg.edit(embedc)
-
-
 
                 var collector = message.author.dmChannel.createMessageCollector(d => d.author.id == message.author.id, {
                     time: 1000 * 50,
                     max: 1
                 })
-                collector.on('collect', async (d) => {
+                collector.on('collect', d => {
                     var valor = d.content
 
                     const embedd = new Discord.RichEmbed()
@@ -63,13 +62,13 @@ exports.run = async (client, message, args) => {
                         .setAuthor("EdD - Pedidos", client.user.avatarURL)
                         .setDescription("⠀\nConfirme seu pedido. ``` ```")
                         .addField("Pedido em confirmação.", `
-\`📡\` Nome do projeto: ${nome}
-\`💡\` Resumo do projeto: ${resumo}
-\`📪\` Valor do projeto: R$${valor}`)
+\`📡\` Projetos: ${nome}
+\`💡\` Resumo do projetos: ${resumo}
+\`📪\` Salário mensal: ${valor}`)
                         .setFooter("© EdD", message.author.avatarURL)
                     msg.edit(embedd).then(async r => {
-                        await msg.react(vv)
                         await msg.react(xx)
+                        await msg.react(vv)
 
                         let s = (r, u) => r.emoji.name === vv.name && u.id == message.author.id
                         let n = (r, u) => r.emoji.name === xx.name && u.id == message.author.id
@@ -88,11 +87,11 @@ exports.run = async (client, message, args) => {
                             const act = new Discord.RichEmbed()
                                 .setColor(c.cor)
                                 .setAuthor("EdD - Pedidos", client.user.avatarURL)
-                                .setDescription("⠀\nSeu pedido foi confirmado... ``` ```")
+                                .setDescription("⠀\nSeu pedido foi confirmado.. ``` ```")
                                 .addField("Pedido confirmado.", `
-\`📡\` Nome do projeto: ${nome}
-\`💡\` Resumo do projeto: ${resumo}
-\`📪\` Valor do projeto: R$${valor}`)
+\`📡\` Projetos: ${nome}
+\`💡\` Resumo do projetos: ${resumo}
+\`📪\` Salário mensal: ${valor}`)
                                 .setFooter("© EdD", message.author.avatarURL)
                             msg.edit(act)
 
@@ -101,11 +100,11 @@ exports.run = async (client, message, args) => {
                                 .setAuthor("EdD - Pedidos", client.user.avatarURL)
                                 .setDescription(`⠀\nPedido de: \`${message.author.tag}\` \`\`\` \`\`\``)
                                 .addField("Informações do pedido.", `
-\`📡\` Nome do projeto: ${nome}
-\`💡\` Resumo do projeto: ${resumo}
-\`📪\` Valor do projeto: R$${valor}`)
-                                .setFooter("Quer fazer um pedido em WEB? Use `!web` na sala `#🤖 comandos` © EdD", message.author.avatarURL)
-                            client.channels.get("622171729006952462").send(pedido)
+\`📡\` Projetos: ${nome}
+\`💡\` Resumo do projetos: ${resumo}
+\`📪\` Salário mensal: ${valor}`)
+                                .setFooter("© EdD", message.author.avatarURL)
+                            client.channels.get("627977318090014761").send(pedido)
 
                         })
 
@@ -125,10 +124,9 @@ exports.run = async (client, message, args) => {
     })
 
 }
-
 exports.help = {
-    name: "web",
+    name: "contratar",
     aliases: [
-        'site'
+        'contrato'
     ]
 }

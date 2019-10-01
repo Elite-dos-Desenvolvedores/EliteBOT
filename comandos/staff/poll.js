@@ -15,7 +15,7 @@ exports.run = async (client, message, args, ops) => {
         .setDescription(args.join(' '))
         .setFooter(`Enquete criada por ${message.author.username}`)
         .setTimestamp()
-        client.channels.get(`622291133782818826`).send('@everyone').then(msg => msg.delete(5000))
+        client.channels.get(`622291133782818826`).send('<@625528878655340554>').then(msg => msg.delete(5000))
 
     let msg = await client.channels.get(`622291133782818826`).send(embed)
 

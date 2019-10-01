@@ -36,7 +36,7 @@ exports.run = async (bot, message, args) => {
                             .addField("Usuário", `${member}`, true)
                             .addField("Staff", message.author.username, true)
                             .setThumbnail(member.displayAvatarURL)
-                            .addField("Motivo", `${motivo}`,true)
+                            .addField("Motivo", `${motivo}`, true)
                             .setFooter(`${member.id}`)
                             .setTimestamp()
 

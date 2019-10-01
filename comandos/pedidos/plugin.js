@@ -104,7 +104,7 @@ exports.run = async (client, message, args) => {
                                 const act = new Discord.RichEmbed()
                                     .setColor(c.cor)
                                     .setAuthor("EdD - Pedidos", client.user.avatarURL)
-                                    .setDescription("⠀\nSeu pedido foi confirmado.. ``` ```")
+                                    .setDescription("⠀\nSeu pedido foi confirmado... ``` ```")
                                     .addField("Pedido confirmado.", `
 \`📡\` Nome do projeto: ${nome}
 \`💎\` Dependência do projeto: ${depend}
@@ -125,6 +125,16 @@ exports.run = async (client, message, args) => {
                                     .setFooter("Quer fazer um pedido em PLUGIN? Use `!plugin` na sala `#🤖 comandos` © EdD", message.author.avatarURL)
                                 client.channels.get("622171690029416479").send(pedido)
 
+                            })
+
+                            nL.on('collect', async r => {
+                                msg.reactions.map(re => re.remove(client.user))
+                                const act = new Discord.RichEmbed()
+                                    .setColor(c.cor)
+                                    .setAuthor("EdD - Pedidos", client.user.avatarURL)
+                                    .setDescription("⠀\nSeu pedido foi cancelado... ``` ```")
+                                    .setFooter("© EdD", message.author.avatarURL)
+                                msg.edit(act)
                             })
                         })
                     })
