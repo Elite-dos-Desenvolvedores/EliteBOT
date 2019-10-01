@@ -21,6 +21,7 @@
     "gifencoder": "^2.0.1",
     "isurl": "^4.0.1",
     "jimp": "^0.8.4",
+    "krunker.js": "^1.2.5",
     "merge-img": "^2.1.3",
     "mojang-api": "0.0.2",
     "moment": "^2.24.0",

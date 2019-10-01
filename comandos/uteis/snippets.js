@@ -126,6 +126,16 @@ exports.run = async (client, message, args) => {
                                 client.channels.get("622623382940155915").send(pedido)
 
                             })
+
+                            nL.on('collect', async r => {
+                                msg.reactions.map(re => re.remove(client.user))
+                                const act = new Discord.RichEmbed()
+                                    .setColor(c.cor)
+                                    .setAuthor("EdD - Snippet de código", client.user.avatarURL)
+                                    .setDescription("⠀\nSeu envio foi cancelado... ``` ```")
+                                    .setFooter("© EdD", message.author.avatarURL)
+                                msg.edit(act)
+                            })
                         })
                     })
                 })

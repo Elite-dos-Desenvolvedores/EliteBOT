@@ -38,15 +38,55 @@ fs.readdir("./comandos", (err, files) => {
     })
 });
 
+
+client.on('guildMemberAdd', member => {
+
+    var numbertowords = require('number-to-words');
+    var membersCount = `${client.guilds.get('622160862605737990').memberCount}`;
+    var membersArray = new Array();
+    var membersSplit = membersCount.split("");
+    var counter = "";
+
+    for (var i = 0; i < membersCount.length; i++) {
+        membersArray[i] = numbertowords.toWords(membersSplit[i]);
+        counter += ':' + membersArray[i] + ': ';
+    }
+
+    const channel = client.channels.get('622160862605737992');
+    channel.setTopic(`Temos atualmente ${counter} membros`)
+});
+
+client.on('guildMemberRemove', member => {
+
+    var numbertowords = require('number-to-words');
+    var membersCount = `${client.guilds.get('622160862605737990').memberCount}`;
+    var membersArray = new Array();
+    var membersSplit = membersCount.split("");
+    var counter = "";
+
+    for (var i = 0; i < membersCount.length; i++) {
+        membersArray[i] = numbertowords.toWords(membersSplit[i]);
+        counter += ':' + membersArray[i] + ': ';
+    }
+
+    const channel = client.channels.get('622160862605737992');
+    channel.setTopic(`Temos atualmente ${counter} membros`)
+});
+
+
+
 client.on('message', async message => {
     if (message.author.bot) return;
     if (message.channel.type === "dm") return;
+    if (message.isMentioned(client.user)) {
+        message.reply('meu prefixo neste servidor é `!`, para ver o que eu posso fazer use `!ajuda` em <#622169842530910218>!');
+    }
     if (!message.content.startsWith(config.prefix)) return;
     if (cooldown.has(message.author.id)) {
         message.delete()
         return message.reply("aguarde 5 segundos para executar um novo comando.").then(msg => msg.delete(5000))
     }
-    if(!message.member.roles.find(role => role.name === "Administrador") || message.member.roles.find(role => role.name === "Moderador")) {
+    if (!message.member.roles.find(role => role.name === "Administrador") || message.member.roles.find(role => role.name === "Moderador")) {
         cooldown.add(message.author.id)
     }
     var messageArray = message.content.split(" ");

@@ -21,7 +21,7 @@ exports.run = async (client, message, args, queue) => {
   if (!serverQueue) return message.channel.send("Não há nada para eu parar por você");
   serverQueue.songs = [];
   serverQueue.connection.dispatcher.end('O comando Stop foi usado!');
-  message.channel.send(`${s} Música foi parada!`);
+  message.channel.send(`🎶 Música foi parada!`);
   return undefined;
 
   // Time for the functions
@@ -78,7 +78,7 @@ exports.run = async (client, message, args, queue) => {
 
     const dispatcher = serverQueue.connection.playStream(yt(song.url))
       .on('end', reason => {
-        if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
+        if (reason === 'Stream is not generating quickly enough.') console.log('Música finalizada.');
         else console.log("STOP " + reason);
         serverQueue.songs.shift();
         setTimeout(() => {
