@@ -11,7 +11,7 @@ exports.run = async (bot, message, args) => {
         } else {
             if (message.member.hasPermission('ATTACH_FILES')) {
                 var authorMessage = message
-                message.channel.send('Aguarde...').then(message => {
+                message.channel.send('🔍 | Processando...').then(message => {
                     Jimp.read(`https://cdn.discordapp.com/attachments/538711394137407488/567123894956457984/tirinha_baby.png`, function (err, image) {
                         if (err) message.channel.send('Ocorreu um erro ao criar a imagem.')
                         Jimp.loadFont(Jimp.FONT_SANS_32_BLACK).then(function (font) {
