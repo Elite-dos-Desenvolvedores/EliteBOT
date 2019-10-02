@@ -82,12 +82,13 @@ client.on('message', async message => {
         message.reply('meu prefixo neste servidor é `!`, para ver o que eu posso fazer use `!ajuda` em <#622169842530910218>!');
     }
     if (!message.content.startsWith(config.prefix)) return;
+    if (!message.member.roles.find(role => role.name === "Administrador") || message.member.roles.find(role => role.name === "Moderador")) {
+        cooldown.add(message.author.id)
+    }
+
     if (cooldown.has(message.author.id)) {
         message.delete()
         return message.reply("aguarde 5 segundos para executar um novo comando.").then(msg => msg.delete(5000))
-    }
-    if (!message.member.roles.find(role => role.name === "Administrador") || message.member.roles.find(role => role.name === "Moderador")) {
-        cooldown.add(message.author.id)
     }
     var messageArray = message.content.split(" ");
     var cmd = messageArray[0].toLowerCase();
