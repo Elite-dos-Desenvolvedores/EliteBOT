@@ -23,9 +23,8 @@ exports.run = async (client, message, args) => {
         .setThumbnail(client.user.avatarURL)
         .setTimestamp()
         .setFooter(`Publicado por: ${message.author.username}`, message.author.avatarURL)
-        console.log(client.channels.get('628959326173921311'))
-    client.channels.get(c.partnerChannel).send('<@625528878655340554>').then(msg => msg.delete(2000))
-    client.channels.get(c.partnerChannel).send(embed)
+    client.channels.get('628959326173921311').send('<@625528878655340554>').then(msg => msg.delete(2000))
+    client.channels.get('628959326173921311').send(embed)
 
     if (cooldown.has(message.author.id)) {
         message.delete()
