@@ -94,7 +94,7 @@ client.on('message', async message => {
     var messageArray = message.content.split(" ");
     var cmd = messageArray[0].toLowerCase();
     var args = messageArray.slice(1);
-    if (message.channel.id !== '622169842530910218' && cmd !== "!limpar" && cmd !== "!embed" && cmd !== "!chat" && cmd !== "!slowmode" && cmd !== "!welcomeroles") return message.reply("utilize o canal <#622169842530910218> para executar um comando!").then(msg => msg.delete(5000))
+    if (message.channel.id !== '622169842530910218' && cmd !== "!limpar" && cmd !== "!embed" && cmd !== "!chat" && cmd !== "!slowmode" && cmd !== "!welcomeroles" && cmd !== "!spacemychannel") return message.reply("utilize o canal <#622169842530910218> para executar um comando!").then(msg => msg.delete(5000))
 
     try {
         var command = client.commands.get(cmd.slice(config.prefix.length)) || client.commands.get(client.aliases.get(cmd.slice(config.prefix.length)))
