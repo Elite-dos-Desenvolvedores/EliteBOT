@@ -1,6 +1,6 @@
 var Vibrant = require("node-vibrant");
 
-exports.run = (Discord, bot, message, args) => {
+exports.run = (bot, message, args) => {
     if (!message.member.roles.find(role => role.name === "Parceiro")) {
         message.channel.send(`${message.author}, você não possui permissão para executar esse comando.`).then(msg => msg.delete(8000))
     }
