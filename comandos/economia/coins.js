@@ -5,7 +5,7 @@ const Database = require('../../database.js');
 exports.run = (client, message, args) => {
     let member = message.mentions.users.first() ? message.mentions.users.first() : message.author
     client.Database.Users.findOne({
-        '_id': member.user.id
+        '_id': member.id
     }, (err, user) => {
 
         if (err) throw err;
