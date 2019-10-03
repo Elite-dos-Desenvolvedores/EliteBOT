@@ -5,7 +5,7 @@ exports.run = async(client, message, args) => {
     const newName = channelName.replace(/-/g, '\u2005');
 
     message.channel.send(`${message.author}, você colocou espaços no canal. `).then(msg => msg.delete(5000));
-    message.channel.setName(newName)
+    message.mentions.channels.first().setName(newName)
 
 }
 
