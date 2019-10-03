@@ -19,7 +19,7 @@ exports.run = async (message, args) => {
   message.reply("coins enviado com sucesso", {member: member, value: value.toLocaleString()})
 }
 
-exports.config = {
+exports.help = {
     name: 'pay',
     aliases: ['pagar', 'doar'],
 }

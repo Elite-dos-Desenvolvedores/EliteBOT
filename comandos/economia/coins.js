@@ -18,7 +18,7 @@ if (user) {
 });
 }
 
-exports.config = {
+exports.help = {
     name: 'coins',
     aliases: ['money', 'saldo']
 }
