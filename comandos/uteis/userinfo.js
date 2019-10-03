@@ -92,12 +92,12 @@ exports.run = (client, message, args) => {
                     .addField("Status", `${status[member.user.presence.status]}`, true)
                     .addField('Entrou em: ', `${moment(member.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
                     .addField("Conta criada em: ", `${moment(member.user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
-                    /*.addField("Permissões: ", `${permissions.join(', ')}`, true)*/
                     .addField(`Cargo [${member.roles.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).length}]`, `${member.roles.filter(r => r.id !== message.guild.id).map(roles => `<@&${roles.id }>`).join(" **|** ") || "Nenhum cargo"}`)
                     .addField("Level", `${documento.level}`, true)
                     .addField("XP", `${documento.xp}`, true)
                     .addField("Portfolio", `${documento.portfolio}`, true)
-                    .addField("Conquistas: ", `${acknowledgements}`, true);
+                    .addField("Reputação: ", `${documento.reps}`, true)
+                    .addField("Coins: ", `${documento.coins}`, true);
 
                 message.channel.send({
                     embed
