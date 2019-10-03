@@ -37,7 +37,7 @@ database.Users.find({}, function (erro, documento) {
 })
 }
 
-exports.config = {
+exports.help = {
     name: "cointop",
     aliases: ["topcoins", "topmoney", "moneytop"]
 }
