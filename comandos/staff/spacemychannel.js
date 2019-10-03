@@ -1,5 +1,5 @@
 exports.run = async(client, message, args) => {
-    const channelName = message.mentions.channels.first();
+    const channelName = message.mentions.channels.first().name
 
     if(!channelName.includes("-")) return message.reply('não é possivel colocar espaços nesse canal.').then(msg => msg.delete(5000));
     const newName = channelName.replace(/-/g, '\u2005');
