@@ -3,9 +3,9 @@ const Discord = require('discord.js');
 const Database = require('../../database.js');
 
 exports.run = (client, message, args) => {
-    let member = message.mentions.users.first() ? message.mentions.users.first() : message.author
+    let user = message.mentions.users.first() ? message.mentions.users.first() : message.author
     client.Database.Users.findOne({
-        '_id': member.id
+        '_id': user.id
     }, (err, user) => {
 
         if (err) throw err;
