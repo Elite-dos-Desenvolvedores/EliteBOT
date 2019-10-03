@@ -89,16 +89,15 @@ client.on('message', async message => {
     var cmd = messageArray[0].toLowerCase();
     var args = messageArray.slice(1);
     if (message.channel.id !== '622169842530910218' && cmd !== "!limpar" && cmd !== "!embed" && cmd !== "!chat" && cmd !== "!slowmode" && cmd !== "!welcomeroles" && cmd !== "!spacemychannel") return message.reply("utilize o canal <#622169842530910218> para executar um comando!").then(msg => msg.delete(5000))
-   
-   
-    if (!message.member.roles.find(role => role.name === "Administrador") || !message.member.roles.find(role => role.name === "Moderador")) {
-        cooldown.add(message.author.id)
-    }
 
-    
     if (cooldown.has(message.author.id)) {
         message.delete()
         return message.reply("aguarde 5 segundos para executar um novo comando.").then(msg => msg.delete(5000))
+    }
+
+
+    if (!message.member.roles.find(role => role.name === "Administrador") || !message.member.roles.find(role => role.name === "Moderador")) {
+        cooldown.add(message.author.id)
     }
 
     try {
