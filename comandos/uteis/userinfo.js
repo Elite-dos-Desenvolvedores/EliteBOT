@@ -68,6 +68,11 @@ exports.run = (client, message, args) => {
     }
 
 
+    client.Database.Reps.findOne({
+        "_id": member.user.id
+    })
+
+
     client.Database.Users.findOne({
         "_id": member.user.id
     }, function (erro, documento) {
