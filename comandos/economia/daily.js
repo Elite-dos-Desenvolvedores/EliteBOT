@@ -1,12 +1,12 @@
 const Dicord = require("discord.js")
-const database = require('../../database.js')
+const Database = require('../../database.js')
 const moment = require('moment')
 require('moment-duration-format')
 moment.locale('pt-BR')
 
-exports.run = (message, args ) => {
-  database.Users.findOne({
-    '_id': member.user.id
+exports.run = (client, message, args ) => {
+  client.Database.Users.findOne({
+    '_id': message.author.id
   }, function (err, documento) {
     if (documento) {
       let valor = documento.Equipe ? 500 : documento.Doador ? 1000 : documento.Partner ? 1500 : 1200

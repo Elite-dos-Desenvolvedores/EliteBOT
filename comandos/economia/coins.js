@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
 
-const db = require('../../database.js');
+const Database = require('../../database.js');
 
-exports.run = (message, args) => {
+exports.run = (client, message, args) => {
     let member = message.mentions.users.first() ? message.mentions.users.first() : message.author
-    db.Users.findOne({
+    client.Database.Users.findOne({
         '_id': member.user.id
     }, (err, user) => {
 
