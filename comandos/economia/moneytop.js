@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const database = require('../database.js')
+const database = require('../../database.js')
 const moment = require('moment')
 require('moment-duration-format')
 moment.locale('pt-BR')
