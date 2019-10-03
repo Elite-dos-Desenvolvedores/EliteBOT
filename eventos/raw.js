@@ -1,4 +1,4 @@
-exports.run = async (client, info) => {
+client.on('raw', async info => {
     if (info.t !== "MESSAGE_REACTION_ADD" && info.t !== "MESSAGE_REACTION_REMOVE") return
     if (info.d.message_id != "566982078625873931") return
 
@@ -89,5 +89,4 @@ exports.run = async (client, info) => {
             member.removeRole(role11)
         }
     }
-
-}
+})
