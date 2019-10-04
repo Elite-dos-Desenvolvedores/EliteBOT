@@ -10,7 +10,7 @@ var num = 0
 
 database.Users.find({}, function (erro, documento) {
     database.Users.findOne({
-        '_id': message.author.id
+        '_id': user.id
       }, function (erro, usu) {
         if (usu) {
             documento.filter(a => users.get(a._id)).map(a => usuarios.push({
@@ -27,7 +27,7 @@ database.Users.find({}, function (erro, documento) {
         const embed = new Discord.RichEmbed()
             .setTitle(`💰 **|** Os top 10 mais ricos`)
             .setDescription(`${moneytop}`)
-            .setColor('#2bbd6f')
+            .setColor('RANDOM')
             .setTimestamp(new Date())
             .setFooter(`💰 Você neste momento tem: ${Number(usu.coins).toLocaleString()} coins`, message.author.displayAvatarURL)
             .setThumbnail('https://cdn.discordapp.com/emojis/615770172653043723.gif?v=1')

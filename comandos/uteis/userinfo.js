@@ -75,7 +75,7 @@ exports.run = (client, message, args) => {
 
     client.Database.Users.findOne({
         "_id": member.user.id
-    }, function (erro, documento) {
+    }, function (erro, documento, economia) {
         const erross = new Discord.RichEmbed()
             .setAuthor(`${member.user.tag}`, client.user.avatarURL)
             .setDescription(`${message.author}, o usuario não possui um perfil registrado.`)
@@ -102,7 +102,7 @@ exports.run = (client, message, args) => {
             .addField("XP", `${documento.xp}`, true)
             .addField("Portfolio", `${documento.portfolio}`, true)
             .addField("Reputação: ", `${documento.reps}`, true)
-            .addField("Coins: ", `${documento.coins}`, true);
+            .addField("Coins: ", `${economia.coins}`, true);
 
         message.channel.send({
             embed
