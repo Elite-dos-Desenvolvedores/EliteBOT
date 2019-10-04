@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const c = require('../comandos/config.json');
 
+exports.name = 'messageDelete';
 exports.run = (client, message) => {
     let logChannel = message.guild.channels.get(c.logChannel);
     if (!logChannel) return;

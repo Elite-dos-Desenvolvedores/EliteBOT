@@ -1,4 +1,5 @@
 const timexp = new Set()
+exports.name = 'message';
 exports.run = (client, message) => {
         if (message.author.bot) return; 
         if (timexp.has(message.author.id)) return;
