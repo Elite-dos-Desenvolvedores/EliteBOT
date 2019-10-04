@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-const rolesChannel = require('../config.json');
+const config = require('../config.json');
 const {districtEmojis} = require('../../utils/emojiRoles.js');
 
 /**
@@ -38,7 +38,7 @@ const toggleDistrictRoles = (event, client) => {
     const channel = client.channels.get(data.channel_id);
 
 
-    if (channel.id !== rolesChannel) return;
+    if (channel.id !== config.rolesChannel) return;
 
     // const user = client.users.get(data.user_id);
     const guild = client.guilds.get(data.guild_id);
