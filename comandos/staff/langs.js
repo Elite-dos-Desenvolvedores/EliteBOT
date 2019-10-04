@@ -1,7 +1,9 @@
 const _ = require('lodash');
 
 const config = require('../config.json');
-const {districtEmojis} = require('../../utils/emojiRoles.js');
+const {
+    districtEmojis
+} = require('../../utils/emojiRoles.js');
 
 /**
  * Add member from role.
@@ -31,41 +33,40 @@ const removeRole = (member, roleId) => member.removeRole(roleId);
  *
  * @return {void}
  */
-const toggleDistrictRoles = (event, client) => {
-    const {
-        d: data
-    } = event;
-    const channel = client.channels.get(data.channel_id);
+
+exports.run = (addRole, removeRole) => {
+    const toggleDistrictRoles = (event, client) => {
+        const {
+            d: data
+        } = event;
+        const channel = client.channels.get(data.channel_id);
 
 
-    if (channel.id !== config.rolesChannel) return;
+        if (channel.id !== config.rolesChannel) return;
 
-    // const user = client.users.get(data.user_id);
-    const guild = client.guilds.get(data.guild_id);
-    const member = guild.members.get(data.user_id);
-    const district = districtEmojis.find(districtEmoji => districtEmoji.emoji === data.emoji.name);
-    const districtRoleId = _.get(district, 'roleId', null);
+        // const user = client.users.get(data.user_id);
+        const guild = client.guilds.get(data.guild_id);
+        const member = guild.members.get(data.user_id);
+        const district = districtEmojis.find(districtEmoji => districtEmoji.emoji === data.emoji.name);
+        const districtRoleId = _.get(district, 'roleId', null);
 
-    try {
-        
-        if (event.t === 'MESSAGE_REACTION_ADD' && districtRoleId) {
-            addRole(member, districtRoleId);
+        try {
+
+            if (event.t === 'MESSAGE_REACTION_ADD' && districtRoleId) {
+                addRole(member, districtRoleId);
+            }
+
+
+            if (event.t === 'MESSAGE_REACTION_REMOVE' && districtRoleId) {
+                removeRole(member, districtRoleId);
+            }
+        } catch (err) {
+
         }
+    };
 
-        
-        if (event.t === 'MESSAGE_REACTION_REMOVE' && districtRoleId) {
-            removeRole(member, districtRoleId);
-        }
-    } catch (err) {
-        
-    }
 };
 
-module.exports = {
-    addRole,
-    removeRole,
-    toggleDistrictRoles,
-};
 
 exports.help = {
     name: 'langs'
