@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const c = require('../comandos/config.json');
 
+exports.name = 'messageUpdate';
 exports.run = (oldMessage, newMessage, message) => {
     if (newMessage.channel.type === 'dm') return;
     if (oldMessage.content == newMessage.content) return;
