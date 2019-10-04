@@ -14,30 +14,45 @@ const queue = new Map();
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
-fs.readdir("./comandos", (err, files) => {
-    if (err) console.error(err);
-    files.forEach((f, i) => {
-        let folder = f.split('.');
-        if (folder[1]) return;
-        fs.readdir(`./comandos/${f}/`, (err, jsf) => {
-            let jsfiles = jsf.filter(f => f.split(".").pop() === "js");
-            if (jsfiles.length <= 0) {
-                return;
-            }
-            jsfiles.forEach((j, k) => {
-                let props = require(`./comandos/${f}/${j}`);
-                console.log(c.bold(`[${f.toUpperCase()}] `) + c.inverse(`${j}`) + c.yellow(' Carregado!'))
-                client.commands.set(props.help.name, props);
-                if (!props.help || !props.help.aliases || props.help.aliases[0] == '') return;
-                props.help.aliases.forEach(alias => {
-                    client.aliases.set(alias, props.help.name);
 
-                })
-            });
-        })
-    })
-});
+/**
+ * Load all commands in a specific directory.
+ * 
+ * @param {string} dir - The commands directory.
+ */
+function loadCommands(dir) {
+    let files = fs.readdirSync(dir);
 
+    for (const file of files) {
+        if(file.split('.').length === 1) {
+            // It's a directory, try to read commands there.
+            loadCommands(`${dir}/${file}`);
+            continue;
+        }
+
+        let cmd = require(`${dir}/${file}`);
+        if(!cmd.help) {
+            // Invalid command.
+            continue;
+        }
+
+        const dirList = dir.split('/');
+        dirList.shift();
+        dirList.shift();
+        const commandCategory = dirList
+            .join('/');
+        console.log(c.bold(`[${commandCategory.toUpperCase()}] `) + c.inverse(`${file}`) + c.yellow(' Carregado!'));
+
+        client.commands.set(cmd.help.name, cmd);
+        if(cmd.help.aliases) {
+            cmd.help.aliases
+            .filter(alias => alias.trim() !== '')
+            .forEach(alias => client.aliases.set(alias, cmd.help.name));
+        }
+    }
+}
+
+loadCommands('./comandos');
 
 client.on('guildMemberAdd', member => {
 
@@ -82,19 +97,23 @@ client.on('message', async message => {
         message.reply('meu prefixo neste servidor é `!`, para ver o que eu posso fazer use `!ajuda` em <#622169842530910218>!');
     }
 
+
+    if (!message.content.startsWith(config.prefix)) return;
+
+    var messageArray = message.content.split(" ");
+    var cmd = messageArray[0].toLowerCase();
+    var args = messageArray.slice(1);
+    if (message.channel.id !== '622169842530910218' && cmd !== "!limpar" && cmd !== "!embed" && cmd !== "!chat" && cmd !== "!slowmode" && cmd !== "!langs" && cmd !== "!spacemychannel") return message.reply("utilize o canal <#622169842530910218> para executar um comando!").then(msg => msg.delete(5000))
+
     if (cooldown.has(message.author.id)) {
         message.delete()
         return message.reply("aguarde 5 segundos para executar um novo comando.").then(msg => msg.delete(5000))
     }
 
-    if (!message.content.startsWith(config.prefix)) return;
-    if (!message.member.roles.find(role => role.name === "Administrador") || message.member.roles.find(role => role.name === "Moderador")) {
+
+    if (!message.member.roles.find(role => role.name === "Administrador") || !message.member.roles.find(role => role.name === "Moderador")) {
         cooldown.add(message.author.id)
     }
-    var messageArray = message.content.split(" ");
-    var cmd = messageArray[0].toLowerCase();
-    var args = messageArray.slice(1);
-    if (message.channel.id !== '622169842530910218' && cmd !== "!limpar" && cmd !== "!embed" && cmd !== "!chat" && cmd !== "!slowmode" && cmd !== "!welcomeroles" && cmd !== "!spacemychannel") return message.reply("utilize o canal <#622169842530910218> para executar um comando!").then(msg => msg.delete(5000))
 
     try {
         var command = client.commands.get(cmd.slice(config.prefix.length)) || client.commands.get(client.aliases.get(cmd.slice(config.prefix.length)))
@@ -102,6 +121,7 @@ client.on('message', async message => {
     } catch (err) {
         console.error("Erro: " + err);
     }
+
     setTimeout(() => {
         cooldown.delete(message.author.id)
     }, 5000)
