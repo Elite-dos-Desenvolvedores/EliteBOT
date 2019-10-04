@@ -75,3 +75,7 @@ exports.run = ({ client, message, args, lang, language }, t) => {
     message.channel.sendMessage(':x: **Diga a plataforma da conta.**')
   }
 }
+
+exports.help = {
+    name: 'fortnite'
+}
