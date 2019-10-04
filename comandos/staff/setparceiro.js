@@ -2,8 +2,7 @@ var database = require('../../database.js')
 
 exports.run = (client, message, args, ) => {
 
-    const parceiro = message.guild.roles.get('622179166133026817'); // Parceiros
-
+    const parceiroRole = message.guild.roles.get('622179166133026817'); // Parceiros
 
     database.Users.findOne({
         '_id': message.author.id
@@ -20,13 +19,14 @@ exports.run = (client, message, args, ) => {
                             if (usuario.parceiro) {
                                 usuario.parceiro = false
                                 usuario.save()
-                                usuario.addRole(parceiro)
+                                usuario.addRole(parceiroRole)
+                                await (usuario.addRole(parceiro.id));
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>**não é mais **parceiro!**`)
                             } else {
                                 usuario.parceiro = true
                                 usuario.timevip = Date.now()
                                 usuario.save()
-                                usuario.removeRole(parceiro)
+                                usuario.removeRole(parceiroRole)
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>** se tornou **parceiro!**`)
                             }
                         } else {
