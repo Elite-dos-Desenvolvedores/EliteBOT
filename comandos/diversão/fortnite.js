@@ -1,7 +1,7 @@
 const FortClient = require('fortnite')
 const fortnite = new FortClient('../config.json')
 
-exports.run = ({ client, message, args, lang, language }, t) => {
+exports.run = (client, message, args) => {
   let razaou = args.slice(0).join(' ')
   let razaod = args.slice(1).join(' ')
 
@@ -16,7 +16,7 @@ exports.run = ({ client, message, args, lang, language }, t) => {
         fortnite.user(`${args[1]}`, plataforma).then(usuario => {
           message.channel.sendMessage({
             'embed': {
-              'color': 11676858,
+              'color': 'RANDOM',
               'timestamp': new Date(),
               'footer': {
                 'icon_url': message.author.displayAvatarURL,
@@ -27,7 +27,7 @@ exports.run = ({ client, message, args, lang, language }, t) => {
               },
               'author': {
                 'name': `${usuario.username}`,
-                'icon_url': 'https://i.imgur.com/NkIThyN.jpg'
+                'icon_url': message.author.displayAvatarURL
               },
               'fields': [{
                 'name': ':notepad_spiral: Username:',

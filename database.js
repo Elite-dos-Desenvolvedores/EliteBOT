@@ -60,7 +60,15 @@ var users = new Schema({
     dailytime: {
         type: String,
         default: '0000'
-    }
+    },
+    owner: {
+        type: Boolean,
+        default: false
+    },
+    timevip: {
+        type: String,
+        default: '0000000000000'
+    },
 })
 
 
