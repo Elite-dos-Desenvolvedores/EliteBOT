@@ -14,30 +14,45 @@ const queue = new Map();
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
-fs.readdir("./comandos", (err, files) => {
-    if (err) console.error(err);
-    files.forEach((f, i) => {
-        let folder = f.split('.');
-        if (folder[1]) return;
-        fs.readdir(`./comandos/${f}/`, (err, jsf) => {
-            let jsfiles = jsf.filter(f => f.split(".").pop() === "js");
-            if (jsfiles.length <= 0) {
-                return;
-            }
-            jsfiles.forEach((j, k) => {
-                let props = require(`./comandos/${f}/${j}`);
-                console.log(c.bold(`[${f.toUpperCase()}] `) + c.inverse(`${j}`) + c.yellow(' Carregado!'))
-                client.commands.set(props.help.name, props);
-                if (!props.help || !props.help.aliases || props.help.aliases[0] == '') return;
-                props.help.aliases.forEach(alias => {
-                    client.aliases.set(alias, props.help.name);
 
-                })
-            });
-        })
-    })
-});
+/**
+ * Load all commands in a specific directory.
+ * 
+ * @param {string} dir - The commands directory.
+ */
+function loadCommands(dir) {
+    let files = fs.readdirSync(dir);
 
+    for (const file of files) {
+        if(file.split('.').length === 1) {
+            // It's a directory, try to read commands there.
+            loadCommands(`${dir}/${file}`);
+            continue;
+        }
+
+        let cmd = require(`${dir}/${file}`);
+        if(!cmd.help) {
+            // Invalid command.
+            continue;
+        }
+
+        const dirList = dir.split('/');
+        dirList.shift();
+        dirList.shift();
+        const commandCategory = dirList
+            .join('/');
+        console.log(c.bold(`[${commandCategory.toUpperCase()}] `) + c.inverse(`${file}`) + c.yellow(' Carregado!'));
+
+        client.commands.set(cmd.help.name, cmd);
+        if(cmd.help.aliases) {
+            cmd.help.aliases
+            .filter(alias => alias.trim() !== '')
+            .forEach(alias => client.aliases.set(alias, cmd.help.name));
+        }
+    }
+}
+
+loadCommands('./comandos');
 
 client.on('guildMemberAdd', member => {
 
