@@ -19,14 +19,11 @@ exports.run = (client, message, args, ) => {
                             if (usuario.parceiro) {
                                 usuario.parceiro = false
                                 usuario.save()
-                                message.mentions.users.first().name.addRole(parceiroRole)
-                                await (usuario.addRole(parceiro.id));
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>**não é mais **parceiro!**`)
                             } else {
                                 usuario.parceiro = true
                                 usuario.timevip = Date.now()
                                 usuario.save()
-                                message.mentions.users.first().name.removeRole(parceiroRole)
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>** se tornou **parceiro!**`)
                             }
                         } else {
