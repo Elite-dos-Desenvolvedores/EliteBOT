@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client();
 const config = require('./comandos/config.json')
 
-mongoose.connect(config.db , {
+mongoose.connect(config.db, {
     useNewUrlParser: true
 }, (err) => {
     if (err) return console.log(`Erro ao conectar no database!\n${err}`)
@@ -34,11 +34,41 @@ var repper = new Schema({
 })
 
 var users = new Schema({
-    _id: {type: String, required: true},
-    user: {type: String},
-    level: { type: Number, default: 1 }, // Rank of User
-    xp: { type: Number, default: 0},
-    portfolio: {type: String, default: "-/-"},
+    _id: {
+        type: String,
+        required: true
+    },
+    user: {
+        type: String
+    },
+    level: {
+        type: Number,
+        default: 1
+    },
+    xp: {
+        type: Number,
+        default: 0
+    },
+    portfolio: {
+        type: String,
+        default: "-/-"
+    },
+    coins: {
+        type: Number,
+        default: 0
+    },
+    dailytime: {
+        type: String,
+        default: '0000'
+    },
+    owner: {
+        type: Boolean,
+        default: false
+    },
+    timevip: {
+        type: String,
+        default: '0000000000000'
+    },
 })
 
 
