@@ -164,7 +164,7 @@ function loadEvents(dir) {
         }
 
         let events = require(`${dir}/${file}`);
-        if(!Array.isArray(event)) {
+        if(!Array.isArray(events)) {
             events = [events]
         }
 
@@ -180,6 +180,6 @@ function loadEvents(dir) {
     }
 }
 
-loadListeners('./eventos/');
+loadEvents('./eventos/');
 
 client.login(config.token);
