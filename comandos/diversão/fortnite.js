@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
 const Fortnite = require("fortnite");
-const apiFortnite = require("../config.json")
-const ft = new Fortnite(apiFortnite.fortnite)
+const fortnite = require("../config.json")
+const ft = new Fortnite(fortnite.fortnite)
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (data, message, args) => {
 
     let username = args.join(` `)
     if(!username) return message.channel.send("Insira o nome de um jogador para ver seus status.")
@@ -22,7 +22,6 @@ module.exports.run = async (bot, message, args) => {
         let top3 = stats.find(s => s.stat == "top3");
         let score = stats.find(s => s.stat == "score");
         let tPlayed = stats.find(s => s.stat == "timePlayed");
-        let asTime = stats.find(s => s.stat == "avgSurvivalTime");
 
         let embed = new Discord.RichEmbed()
         .setTitle(`Status de ${data.username} no Krunker`)
