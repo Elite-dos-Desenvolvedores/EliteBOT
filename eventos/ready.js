@@ -1,3 +1,4 @@
+exports.name = 'ready';
 exports.run = (client) => {
     let gameloop = require(`./gameLoop.js`);
     gameloop.run(client);
