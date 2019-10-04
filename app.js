@@ -110,7 +110,6 @@ client.on('message', async message => {
     setTimeout(() => {
         cooldown.delete(message.author.id)
     }, 5000)
-    console.log(setTimeout)
 })
 
 

@@ -11,7 +11,7 @@ exports.run = (client, message, args) => {
         if (err) throw err;
 
         if (user) {
-            let msg = message.mentions.users.first() ? (`${user.tag} tem ${user.coins} coins`) : (`Você tem ${user.coins} coins`)
+            let msg = message.mentions.users.first() ? (`${user} tem ${user.coins} coins`) : (`Você tem ${user.coins} coins`)
             message.channel.send(msg)
 
         } else {
