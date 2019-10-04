@@ -5,7 +5,8 @@ const fs = require("fs");
 const moment = require('moment');
 const yt = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
-const youtube = new YouTube('AIzaSyAntMu3piyFukdVknRsh5kO09dr1pr5hJw');
+const config = require('../config.json')
+const youtube = new YouTube(config.youtube);
 
 exports.run = async (client, message, args, queue) => {
   const p = client.emojis.find("name", "play")

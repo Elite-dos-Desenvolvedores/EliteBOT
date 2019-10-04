@@ -4,7 +4,8 @@ const client = new Discord.Client();
 const config = require('./comandos/config.json')
 
 mongoose.connect(config.db, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }, (err) => {
     if (err) return console.log(`Erro ao conectar no database!\n${err}`)
     console.log(`Conectado ao BANCO DE DADOS!`)
@@ -68,6 +69,10 @@ var users = new Schema({
     timevip: {
         type: String,
         default: '0000000000000'
+    },
+    parceiro: {
+        type: Boolean,
+        default: false
     },
 })
 

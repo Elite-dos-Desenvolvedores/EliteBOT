@@ -30,7 +30,7 @@
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^5.6.10",
-    "node-gyp": "^5.0.3",
+    "node-gyp": "^6.0.0",
     "node-vibrant": "^3.1.4",
     "number-to-words": "^1.2.4",
     "opusscript": "0.0.7",

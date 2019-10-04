@@ -2,8 +2,8 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const moment = require('moment');
 const yt = require('ytdl-core');
-const YouTube = require('simple-youtube-api');
-const youtube = new YouTube('AIzaSyAntMu3piyFukdVknRsh5kO09dr1pr5hJw');
+const YouTube = require('simple-youtube-api');const config = require('../config.json')
+const youtube = new YouTube(config.youtube);
 const opus = require("opusscript");
 const gyp = require("node-gyp");
 
