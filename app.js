@@ -133,21 +133,6 @@ client.on("ready", () => {
     console.log(c.bold('[CONECTADO] ') + c.green('A aplicação foi conectada e estabelecida com sucesso!'))
 })
 
-
-
-fs.readdir("./eventos/", (err, files) => {
-    if (err) return console.error("ERRO: " + err)
-
-    files.forEach(file => {
-
-        var eventFunction = require(`./eventos/${file}`)
-        var eventName = file.split(".")[0];
-        console.log(`[EVENTO] ${file}` + c.yellow(' Carregado!'))
-
-        client.on(eventName, (...args) => eventFunction.run(client, ...args))
-    })
-})
-
 /**
  * Load all events in a specific directory.
  * 
