@@ -99,6 +99,7 @@ exports.run = async (client, message, args) => {
 
                         fim.on('collect', f => {
                             let n5 = f.content
+
                             client.Database.Users.findOne({
                                 _id: message.author.id
                             }, function (erro, documento) {
@@ -113,14 +114,12 @@ exports.run = async (client, message, args) => {
                                 } else {
                                     new client.Database.Users({
                                         _id: message.author.id,
-                                        name = n1,
-                                        age = n2,
-                                        aboutme = n3,
-                                        favelangs = n4,
-                                        portfolio = n5
+                                        name: n1,
+                                        age: n2,
+                                        aboutme: n3,
+                                        favelangs: n4,
+                                        portfolio: n5
                                     }).save()
-
-
                                 }
                             })
                             const fimn = new Discord.RichEmbed()
