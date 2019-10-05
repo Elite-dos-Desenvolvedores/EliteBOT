@@ -50,6 +50,22 @@ var users = new Schema({
         type: Number,
         default: 0
     },
+    name: {
+        type: String,
+        default: "-/-"
+    },
+    age: {
+        type: String,
+        default: "-/-"
+    },
+    aboutme: {
+        type: String,
+        default: "-/-"
+    },
+    favelangs: {
+        type: String,
+        default: "-/-"
+    },
     portfolio: {
         type: String,
         default: "-/-"

@@ -99,6 +99,30 @@ exports.run = async (client, message, args) => {
 
                         fim.on('collect', f => {
                             let n5 = f.content
+                            client.Database.Users.findOne({
+                                _id: message.author.id
+                            }, function (erro, documento) {
+                                if (documento) {
+                                    documento.name = n1,
+                                        documento.age = n2,
+                                        documento.aboutme = n3,
+                                        documento.favelangs = n4,
+                                        documento.portfolio = n5
+                                    documento.save()
+
+                                } else {
+                                    new client.Database.Users({
+                                        _id: message.author.id,
+                                        name = n1,
+                                        age = n2,
+                                        aboutme = n3,
+                                        favelangs = n4,
+                                        portfolio = n5
+                                    }).save()
+
+
+                                }
+                            })
                             const fimn = new Discord.RichEmbed()
                                 .setColor("RANDOM")
                                 .setDescription(`**100%** [\`██████████\`] 
@@ -117,8 +141,8 @@ Sua apresentação foi enviada!\`\`\``)
                                 .addField('**Nome:**', n1)
                                 .addField('**Nick:**', message.author)
                                 .addField('**Aniversário:**', n2)
-                                .addField('**Sobre mim:', n3)
-                                .addField('**Linguagens favoritas:', n4)
+                                .addField('**Sobre mim:**', n3)
+                                .addField('**Linguagens favoritas:**', n4)
                                 .addField('**Portfolio:**', n5)
                                 .setThumbnail(message.author.displayAvatarURL)
                                 .setFooter("Quer se apresentar? Use !apresentar no canal de comandos.", message.author.avatarURL)
