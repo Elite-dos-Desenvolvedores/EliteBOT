@@ -25,7 +25,7 @@ exports.run = async (client, message, args) => {
         \`\`\`fix
 A qual cargo você deseja ser verificado?\`\`\` `)
 
-        if (a.content.toLowerCase() === "cancelar") return;
+        if (a.content.toLowerCase() === "cancelar") return message.author.send('O processo de requisição foi cancelado.');
         if (a.content.toLowerCase() === "continuar") message.author.send(pergun1)
 
         var prg2 = message.author.dmChannel.createMessageCollector(b => b.author.id == message.author.id, {
@@ -34,7 +34,7 @@ A qual cargo você deseja ser verificado?\`\`\` `)
         })
 
         prg2.on('collect', b => {
-            if (b.content.toLowerCase() === "cancelar") return;
+            if (b.content.toLowerCase() === "cancelar") return message.author.send('O processo de requisição foi cancelado.');
             let n1 = b.content
             const pergun2 = new Discord.RichEmbed()
                 .setColor(c.discord)
@@ -50,7 +50,7 @@ A qual cargo você deseja ser verificado?\`\`\` `)
             })
 
             prg3.on('collect', c => {
-                if (c.content.toLowerCase() === "cancelar") return;
+                if (c.content.toLowerCase() === "cancelar") return message.author.send('O processo de requisição foi cancelado.');
                 let n2 = c.content
                 const pergun3 = new Discord.RichEmbed()
                     .setColor(c.discord)

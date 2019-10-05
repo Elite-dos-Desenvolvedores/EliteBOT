@@ -22,16 +22,16 @@ exports.run = (client, message) => {
             for (i = 0; i < res.length; i++) {
                 let member = client.users.get(res[i]._id)
                 if (member) {
-                    embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Level**: ${res[i].level}, **XP**: ${res[i].xp}`);
+                    embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Level**: ${res[i].level} - **XP**: ${res[i].xp}`);
                 } else {
-                    embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Level**: ${res[i].level}, **XP**: ${res[i].xp}`);
+                    embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Level**: ${res[i].level} - **XP**: ${res[i].xp}`);
                 }
             }
         } else {
             embed.setColor("RANDOM");
             for (i = 0; i < 5; i++) {
                 let member = client.users.get(res[i]._id)
-                embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Level**: ${res[i].level}, **XP**: ${res[i].xp}`); //adicionamos na embed o nome e os coins do usuario
+                embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Level**: ${res[i].level} - **XP**: ${res[i].xp}`); //adicionamos na embed o nome e os coins do usuario
             }
         }
         message.channel.send(embed)
