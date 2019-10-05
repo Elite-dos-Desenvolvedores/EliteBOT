@@ -126,8 +126,9 @@ Sua apresentação foi enviada!\`\`\``)
 
 
 
+
                             const apresentacao = new Discord.RichEmbed()
-                                .setAuthor(`Apresentação de ${message.author.tag}`, message.author.displayAvatarURL)
+                                .setAuthor(`Apresentação de ${message.author}`, message.author.displayAvatarURL)
                                 .setColor("RANDOM")
                                 .addField('**Nome:**', n1)
                                 .addField('**Nick:**', message.author)
