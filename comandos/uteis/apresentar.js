@@ -25,8 +25,7 @@ exports.run = async (client, message, args) => {
         const pergun1 = new Discord.RichEmbed()
             .setColor("RANDOM")
             .setDescription(`**0%** [\`----------\`] 
-                                    \`\`\`fix
-                            #1 - Insira seu nome:\`\`\` `)
+                                    \`\`\`fix #1 - Insira seu nome:\`\`\` `)
 
         if (a.content.toLowerCase() === "cancelar") return message.author.send('O processo de apresentação foi cancelado.');
         if (a.content.toLowerCase() === "continuar") message.author.send(pergun1)
@@ -42,8 +41,7 @@ exports.run = async (client, message, args) => {
             const pergun2 = new Discord.RichEmbed()
                 .setColor("RANDOM")
                 .setDescription(`**20%** [\`██--------\`] 
-                                        \`\`\`fix
-                                #2 - Insira sua data de aniversário: [dia/mês]\`\`\``)
+                                        \`\`\`fix #2 - Insira sua data de aniversário: [dia/mês]\`\`\``)
             message.author.send(pergun2)
 
 
@@ -58,8 +56,7 @@ exports.run = async (client, message, args) => {
                 const pergun3 = new Discord.RichEmbed()
                     .setColor("RANDOM")
                     .setDescription(`**40%** [\`████------\`] 
-        \`\`\`fix
-#3 - Insira uma breve descrição sobre você:\`\`\``)
+        \`\`\`fix #3 - Insira uma breve descrição sobre você:\`\`\``)
                 message.author.send(pergun3)
 
                 var prg4 = message.author.dmChannel.createMessageCollector(d => d.author.id == message.author.id, {
@@ -73,8 +70,7 @@ exports.run = async (client, message, args) => {
                     const pergun4 = new Discord.RichEmbed()
                         .setColor("RANDOM")
                         .setDescription(`**60%** [\`██████--\`] 
-        \`\`\`fix
-#4- Insira suas linguagens favoritas: [Java, Kotlin, Javascript, PHP...]\`\`\``)
+        \`\`\`fix #4- Insira suas linguagens favoritas: [Java, Kotlin, Javascript, PHP...]\`\`\``)
                     message.author.send(pergun4)
 
                     var prg5 = message.author.dmChannel.createMessageCollector(d => d.author.id == message.author.id, {
@@ -88,8 +84,7 @@ exports.run = async (client, message, args) => {
                         const pergun5 = new Discord.RichEmbed()
                             .setColor("RANDOM")
                             .setDescription(`**80%** [\`████████--\`] 
-        \`\`\`fix
-#3 - Insira o link para seu portfolio: [Github ou site] \`\`\``)
+        \`\`\`fix #5 - Insira o link para seu portfolio: [Github ou site] \`\`\``)
                         message.author.send(pergun5)
 
                         var fim = message.author.dmChannel.createMessageCollector(d => d.author.id == message.author.id, {
@@ -135,7 +130,7 @@ Sua apresentação foi enviada!\`\`\``)
                             const checked = client.emojis.find("name", "checked")
                             const unchecked = client.emojis.find("name", "unchecked")
                             const apresentacao = new Discord.RichEmbed()
-                                .setAuthor(`Apresentação de ${message.author}`, message.author.displayAvatarURL)
+                                .setAuthor(`Apresentação de <@${message.author.id}>`, message.author.displayAvatarURL)
                                 .setColor("RANDOM")
                                 .addField('**Nome:**', n1)
                                 .addField('**Nick:**', message.author)
