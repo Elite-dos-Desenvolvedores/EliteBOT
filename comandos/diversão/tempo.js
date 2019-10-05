@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
         if (!result[0]) return message.channel.send(`Essa cidade não existe.`)
         const embed = new Discord.RichEmbed()
             .setAuthor(`Tempo em ${result[0].location.name}`)
-            .setDescription(`**${current.skytext}**`)
+            .setDescription(`**${result[0].current.skytext}**`)
             .addField(`**Temperatura:** ${result[0].current.temperature}°C`, true)
             .addField(`**Sensação Térmica:** ${result[0].current.feelslike}`, true)
             .addField(`**Umidade:** ${result[0].current.humidity}%`, true)
