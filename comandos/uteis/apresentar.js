@@ -120,7 +120,7 @@ Sua apresentação foi enviada!\`\`\``)
                                 .addField('Sobre mim:', n3)
                                 .addField('Linguagens favoritas:', n4)
                                 .addField('Portfolio:', n5)
-                                .setThumbnail(member.user.displayAvatarURL)
+                                .setThumbnail(message.author.displayAvatarURL)
                                 .setFooter("Quer se apresentar? Use !apresentar no canal de comandos.", message.author.avatarURL)
                             client.channels.get('630108453515296778').send(apresentacao)
 
