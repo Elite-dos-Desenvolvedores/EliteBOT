@@ -12,6 +12,7 @@ exports.run = (client, message) => {
       .setTitle("Top **5** - Recomendados")
       .setDescription('Use `!recomendar` para recomendar um usuário.')
       .setThumbnail(client.user.avatarURL)
+      .setFooter(message.author.tag, message.author.avatarURL)
     if (res.length === 0) { //se o resultado for igual a 0
       embed.setColor("RANDOM");
       embed.addField("Nenhum usuario no banco de dados encontrado", "Colete recomendações para aparecer aqui.")

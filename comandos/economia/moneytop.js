@@ -12,6 +12,8 @@ exports.run = (client, message) => {
       .setTitle("Top **10** - Money")
       .setDescription('Use `!daily` para coletar coins diariamente.')
       .setThumbnail(client.user.avatarURL)
+      .setFooter(message.author.tag, message.author.avatarURL)
+      .setTimestamp()
     if (res.length === 0) { //se o resultado for igual a 0
       embed.setColor("RANDOM");
       embed.addField("Nenhum usuario no banco de dados encontrado", "Colete coins para aparecer aqui.")
