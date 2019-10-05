@@ -1,39 +1,38 @@
-  
-var database = require('../../database.js')
+const Database = require("../../database.js");
+const Discord = require('discord.js')
 
 exports.run = (client, message) => {
-  var usuarios = []
-  var num = 0
 
-  database.Users.find({}, function (erro, documento) {
-    database.Users.findOne({
-      '_id': message.author.id
-    }, function (err, usu) {
-      if (usu) {
-        documento.filter(a => message.guild.members.get(a._id)).map(a => usuarios.push({
-          user: a._id,
-          coins: a.coins
-        }))
-        usuarios.sort(function (a, b) {
-          return b.coins - a.coins
-        })
-        var moneytop = usuarios.map(a => '**' + (num += 1) + '** - ' + client.users.get(a.user).username + ' **' + Number(a.coins).toLocaleString() + ' coins.**').slice(0, 10).join('\n')
-        message.channel.sendMessage({
-          'embed': {
-            'title': `:moneybag: TOP Money:`,
-            'description': `${moneytop}`,
-            'color': 'RANDOM',
-            'timestamp': new Date(),
-            'footer': {
-              'icon_url': message.author.displayAvatarURL,
-              'text': `Sua pontuação: ${Number(usu.coins).toLocaleString()} coins.`
-            }
-          }
-        })
-      } else {
-        message.channel.sendMessage(':x: **Ocorreu um erro ao executar este comando.**')
+  Database.Users.find().sort([
+    ['coins', 'descending']
+  ]).exec((err, res) => {
+    if (err) console.log(err);
+    let i = 0;
+    let embed = new Discord.RichEmbed()
+      .setTitle("Top **10** - Money")
+      .setDescription('Use `!daily` para coletar coins diariamente.')
+      .setThumbnail(client.user.avatarURL)
+    if (res.length === 0) { //se o resultado for igual a 0
+      embed.setColor("RANDOM");
+      embed.addField("Nenhum usuario no banco de dados encontrado", "Colete coins para aparecer aqui.")
+    } else if (res.length < 10) { // se o resultado menor q 5
+      embed.setColor("RANDOM");
+      for (i = 0; i < res.length; i++) {
+        let member = client.users.get(res[i]._id)
+        if (member) {
+          embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Money**: ${res[i].coins}`);
+        } else {
+          embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Money**: ${res[i].coins}`);
+        }
       }
-    })
+    } else {
+      embed.setColor("RANDOM");
+      for (i = 0; i < 5; i++) {
+        let member = client.users.get(res[i]._id)
+        embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Money**: ${res[i].coins}`); //adicionamos na embed o nome e os coins do usuario
+      }
+    }
+    message.channel.send(embed)
   })
 }
 exports.help = {
