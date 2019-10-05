@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
         .setTitle('**Apresente-se**')
         .setDescription(`${message.author} bem-vindo ao sistema de apresentação, todas as informações insiridas aqui apareceram em seu perfil no nosso discord.
         \n Para cancelar a apresentação digite \`cancelar\` a qualquer momento no chat.
-        \n  Para continuar digite \`continuar\` a qualquer momento no chat.`)
+        \n  Para continuar digite \`continuar\` para iniciar a apresentação.`)
         .setColor('RANDOM')
         .setTimestamp()
         .setFooter(`${message.author.username}`, message.author.avatarURL)
@@ -98,7 +98,7 @@ exports.run = async (client, message, args) => {
                         })
 
                         fim.on('collect', f => {
-                            let n5 = e.content
+                            let n5 = f.content
                             const fimn = new Discord.RichEmbed()
                                 .setColor("RANDOM")
                                 .setDescription(`**100%** [\`██████████\`] 
@@ -114,12 +114,12 @@ Sua apresentação foi enviada!\`\`\``)
                             const apresentacao = new Discord.RichEmbed()
                                 .setAuthor(`Apresentação de ${message.author}`, message.author.displayAvatarURL)
                                 .setColor("RANDOM")
-                                .addField('Nome:', n1)
-                                .addField('Nick:', message.author)
-                                .addField('Aniversário', n2)
-                                .addField('Sobre mim:', n3)
-                                .addField('Linguagens favoritas:', n4)
-                                .addField('Portfolio:', n5)
+                                .addField('**Nome:**', n1)
+                                .addField('**Nick:**', message.author)
+                                .addField('**Aniversário:**', n2)
+                                .addField('**Sobre mim:', n3)
+                                .addField('**Linguagens favoritas:', n4)
+                                .addField('**Portfolio:**', n5)
                                 .setThumbnail(message.author.displayAvatarURL)
                                 .setFooter("Quer se apresentar? Use !apresentar no canal de comandos.", message.author.avatarURL)
                             client.channels.get('630108453515296778').send(apresentacao)
