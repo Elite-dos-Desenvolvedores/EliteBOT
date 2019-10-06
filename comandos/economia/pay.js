@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 
 exports.run = async (args, message) => {
-  let member = message.mentions.users.first() || message.guild.members.get(args[0]).user
+  let member = message.mentions.users.first() || users.get(args[0])
   if (!member) return message.reply("mencione um usuário para enviar um pagamento.")
   if (member.id === message.author.id) return message.reply("você não pode fazer um pagamento para você mesmo!")
   let value = args[1]
