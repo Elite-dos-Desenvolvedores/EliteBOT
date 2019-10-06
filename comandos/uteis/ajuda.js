@@ -28,6 +28,7 @@ module.exports.run = async (client, message, args) => {
         .addField(`👦 **Usuário**`, '• `portfolio`, `recomendações`, `reputação`...')
         .addField(`😂 **Diversão**`, '• `bigtext`, `lenny`, `coinflip`, `dados`...')
         .addField(`🎶 **Música**`, '• `play`, `stop`, `skip`, `playlist`...')
+        .addField(`⚙️ **Staff**`, '• `ban`, `mute`, `chat`, `limpar`...')
         .setFooter(message.author.tag, message.author.avatarURL)
         .setTimestamp()
         .setColor('RANDOM')
@@ -37,6 +38,7 @@ module.exports.run = async (client, message, args) => {
         await msg.react('👦')
         await msg.react('😂')
         await msg.react('🎶')
+        await msg.react('⚙️')
         await msg.react("↩")
 
 
@@ -45,6 +47,7 @@ module.exports.run = async (client, message, args) => {
         const usuario = (reaction, user) => reaction.emoji.name === '👦' && user.id === message.author.id;
         const diversao = (reaction, user) => reaction.emoji.name === '😂' && user.id === message.author.id;
         const musica = (reaction, user) => reaction.emoji.name === '🎶' && user.id === message.author.id;
+        const staff = (reaction, user) => reaction.emoji.name === '⚙️' && user.id === message.author.id;
 
         const back = (reaction, user) => reaction.emoji.name === "↩" && user.id === message.author.id;
 
@@ -53,6 +56,7 @@ module.exports.run = async (client, message, args) => {
         const pedidosL = msg.createReactionCollector(pedidos)
         const diversaoL = msg.createReactionCollector(diversao)
         const musicaL = msg.createReactionCollector(musica)
+        const staffL = msg.createReactionCollector(staff)
 
         const backL = msg.createReactionCollector(back)
 
@@ -85,15 +89,16 @@ module.exports.run = async (client, message, args) => {
                 !sugerir \`<sugestão>\` - Crie uma sugestão para melhorar nosso servidor.
                 !avatar - Mostra o avatar de um usuário ou do próprio usuário que usou o comando.
                 !invites - Mostra o rank de convites.
-                !lembrete - Te lembra de algo importante.
+                !lembrete \`<tempo>\` \`<lembrete>\` - Te lembra de algo importante.
                 !notificar - Recebe a tag 🔔 NOTIFICAR (!notificar) e recebe novidades do servidor.
+                !desnotificar - Remove a tag 🔔 NOTIFICAR (!notificar).
                 !rank - Mostra o rank de XP.
-                !recomendar \`<usuario>\` - Da um ponto de recomendação ao usuário.
-                !reps - Mostra a quantidade de recomendações que você recebeu.
+                !topmoney - Mostra o rank de money.
+                !ping - Mostra o delay bot-servidor.
                 !toprep - Mostra o rank de recomendações.
                 !codigo - Usado para enviar códigos snippets na sala 💾 snippets de códigos.
-                !setportfolio \`<url>\` - Define a url do seu portfolio.
-                !portfolio - Mostra a url do seu portfolio.
+                !imgur \`<img>\` - Faz upload de uma imagem para o Imgur.
+
 
          `)
                 .setColor("RANDOM")
@@ -123,11 +128,10 @@ module.exports.run = async (client, message, args) => {
                 .setAuthor(`${message.guild.name} - Ajuda`)
                 .setDescription(`👦 **USUARIO**
                         
-                !portfolio \`<@user>\` - Vê o portfolio de um usuário.
-                !setportfolio \`<portfolio>\` - Defina seu portfolio.
-                !recomendações - Veja o suas recomendações.
+                !apresentar - Apresente-se em nosso servidor.
+                !setportfolio \`<url>\` - Adiciona ou altera o link do seu portfolio.
+                !recomendações - Mostra seus pontos de recomendação.
                 !recomendar - \`<@user>\` - Recomende um usuário.
-                !reputação - Veja o top recomendações.
 
         `)
                 .setColor("RANDOM")
@@ -143,12 +147,21 @@ module.exports.run = async (client, message, args) => {
                         
                 !dados \`<quantidade>\` - Joga até 5 dados na mesa.
                 !coinflip - Joga moeda para cima.
-                !emojify - Transforma seus textos em emojis.
+                !emojify \`<texto>\`- Transforma seus textos em emojis.
                 !random - Mostra aleatoriamente um número.
                 !say \`<mensagem>\` - Faz com que eu repita uma frase.
                 !aquelacarinha - Aquela carinha. ( ͡ʘ ͜ʖ ͡ʘ)
-                !casal \`<@user1> <@user2>\` - Cria uma foto do casal.
                 !guess - Acerte o número aleatório em 10 tentativas.
+                !8ball \`<mensagem>\` - Responde suas perguntas.
+                !biscoito \`<usuário>\` - Da um biscoito para um usuário. 🍪
+                !tapa \`<usuário>\` - Da um tapa em um usuário.
+                !morse \`<mensagem>\` - Transforma um texto em código morse.
+                !hex \`<código hex>\` - Mostra o hex e o rgb de uma cor.
+                !dog - Mostra uma imagem fofinha de cachorro.
+                !cat - Mostra uma imagem fofinha de gato.
+                !triggerd \`<usuário>\` - Deixa um usuário irritado.
+                !faketweet \`<usuário>\` \`<mensagem>\` - Cria um tweet fake apartir de um usuário.
+                !primeiraspalavras \`<mensagem>\` - Cria o meme das primeiras palavras.
 
         `)
                 .setColor("RANDOM")
@@ -178,8 +191,34 @@ module.exports.run = async (client, message, args) => {
             msg.edit(embeddiversao)
         })
 
-    }) // https://cdn.discordapp.com/emojis/520666775638114309.gif?v=1
-} // final
+        staffL.on('collect', r => {
+            const embeddiversao = new Discord.RichEmbed()
+                .setAuthor(`${message.guild.name} - Ajuda`)
+                .setDescription(`⚙️ **Staff**
+                        
+                !ban \`<usuário>\` \`<razão>\` - Bane um usuário.
+                !mute \`<usuário>\` \`<tempo>\` \`<razão>\` - Muta um usuário por certo tempo.
+                !unban \`<usuário>\` - Desbane um usuário.
+                !unmute \`<usuário>\` - Desmuta um usuário.
+                !slowmode \`<tempo>\` - Define o tempo do slowmode para uma sala.
+                !limpar \`<quantidade>\` - Limpa uma certa quantia de mensagens. (1 a 100)
+                !addemoji \`<nome>\` \`<url>\` - Adiciona um emoji ao servidor apartir de uma url.
+                !listban - Envia no privado uma lista dos usuários banidos do servidor.
+                !spacemychannel \`<canal>\` - Remove hifens do nome de um canal.
+                !embed \`<mensagem>\` - Cria um embed apartir de uma mensagem.
+                !setparceiro \`<usuário>\` - Define um usuário como parceiro.
+                !setdoador \`<usuário>\` \`<tempo>\` - Define um usuário como doador por até 30 dias.
+                !rolemention \`<id do cargo>\` - Muda o status de um cargo de não-mencionavel para mencionavel por 15 segundos.
+ 
+        `)
+                .setColor("RANDOM")
+                .setFooter(message.author.tag, message.author.avatarURL)
+                .setTimestamp()
+            msg.edit(embeddiversao)
+        })
+
+    }) 
+} 
 
 
 exports.help = {

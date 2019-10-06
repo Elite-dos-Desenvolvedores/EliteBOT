@@ -3,8 +3,12 @@ const c = require('../comandos/config.json');
 
 exports.name = 'messageDelete';
 exports.run = (client, message) => {
+    if (message.channel.type === 'dm') return;
+
     let logChannel = message.guild.channels.get(c.logChannel);
     if (!logChannel) return;
+
+    if (message.author.bot) return;
 
     let embed = new Discord.RichEmbed()
         .setAuthor(`${message.author.username}`, message.author.displayAvatarURL)
