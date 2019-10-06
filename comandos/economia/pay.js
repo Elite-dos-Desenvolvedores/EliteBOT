@@ -2,8 +2,6 @@ const Discord = require("discord.js")
 const Database = require('../../database.js')
 
 exports.run = async (client, message, args) => {
-  const valor = parseInt(args[1]);
-
   let member = message.mentions.users.first();
   if (!member) return message.reply("mencione um usuário para enviar um pagamento.");
   if (member.id === message.author.id) return message.reply("você não pode fazer um pagamento para você mesmo!");
