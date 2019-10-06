@@ -10,15 +10,15 @@ exports.run = async (client, message, args) => {
     }
 
     const embed = new Discord.RichEmbed()
-        .setAuthor(`Sugestão de: ${message.author.username}`, message.author.avatarURL)
+        .setAuthor(`Sugestão de: ${message.author.username}`, message.author.displayAvatarURL)
         .setDescription(`${mensg}`)
         .setColor('RANDOM')
-        .setThumbnail(message.author.avatarURL)
+        .setThumbnail(message.author.displayAvatarURL)
         .setTimestamp()
     client.channels.get(`622308143812050964`).send(embed)
         .then(function (msg) {
             msg.react("👍");
-            msg.react("👎"); // You can only add two reacts
+            msg.react("👎"); 
             message.delete({
                 timeout: 1000
             });
