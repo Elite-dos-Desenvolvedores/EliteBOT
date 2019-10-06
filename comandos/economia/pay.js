@@ -20,7 +20,7 @@ exports.run = async (args, message) => {
   })
 
 
-  const valor = args[1]
+  const valor = parseInt(args[1])
   doador.coins -= valor
   membro.coins += valor
   membro.save()
