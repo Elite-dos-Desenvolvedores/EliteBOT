@@ -41,3 +41,7 @@ exports.run = (message) => {
         }
     })
 }
+
+exports.help = {
+    name: 'setdoador'
+}
