@@ -1,7 +1,7 @@
 var database = require('../../database.js')
 
 exports.run = (client, message, args) => {
-    const doadorRole = message.guild.roles.get('630518001086627871'); // Doador
+    
     database.Users.findOne({
         '_id': message.author.id
     }, function (erro, developer) {
@@ -18,13 +18,13 @@ exports.run = (client, message, args) => {
                                 usuario.doador = false
                                 usuario.save()
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>** não é mais um **doador!**`)
-                                message.member.removeRole(doadorRole).catch(console.error);
+                                message.member.removeRole('630518001086627871').catch(console.error);
                             } else {
                                 usuario.doador = true
                                 usuario.timedoador = Date.now()
                                 usuario.save()
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>** agora é um **doador!**`)
-                                message.member.addRole(doadorRole).catch(console.error);
+                                message.member.addRole('630518001086627871').catch(console.error);
                             }
                         } else {
                             message.channel.send('Ocorreu um erro ao executar este comando.')
