@@ -18,13 +18,13 @@ exports.run = (client, message, args) => {
                                 usuario.doador = false
                                 usuario.save()
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>** não é mais um **doador!**`)
-                                message.member.removeRole('630518001086627871').catch(console.error);
+                                message.mentions.members.first().removeRole('630518001086627871').catch(console.error);
                             } else {
                                 usuario.doador = true
                                 usuario.timedoador = Date.now()
                                 usuario.save()
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>** agora é um **doador!**`)
-                                message.member.addRole('630518001086627871').catch(console.error);
+                                message.mentions.members.first().addRole('630518001086627871').catch(console.error);
                             }
                         } else {
                             message.channel.send('Ocorreu um erro ao executar este comando.')
