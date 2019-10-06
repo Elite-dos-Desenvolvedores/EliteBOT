@@ -9,15 +9,15 @@ exports.run = (client, message, args ) => {
     '_id': message.author.id
   }, function (err, documento) {
     if (documento) {
-      let valor = documento.Equipe ? 500 : documento.Doador ? 1000 : documento.Partner ? 1500 : 100
-      var tempo = moment.duration.format([moment.duration((parseInt(documento.dailytime) + 86400000) - Date.now())], 'hh:mm:ss')
+      let valor = documento.equipe ? 150 : documento.doador ? 250 : documento.parceiro ? 200 : 100
+      var tempo = moment.duration.format([moment.duration((parseInt(documento.dailytime) + 86400000) - Date.now())], 'D MMMM YYYY, h:mm:ss')
      if ((parseInt(documento.dailytime) + 86400000) <= (Date.now())) {
         documento.coins += valor
         documento.dailytime = Date.now()
         documento.save()
-        message.channel.send(`Você recebeu ${valor} coins`)
+        message.channel.reply(`você recebeu ${valor} coins`)
       } else {
-        message.channel.send(`Você só pode pegar seus coins diários daqui ${tempo}`)
+        message.channel.reply(`você só pode pegar seus coins diários daqui ${tempo}`)
       } 
     } else {
        message.channel.send("Ocorreu um erro ao executar o comando...")

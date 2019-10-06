@@ -70,6 +70,7 @@ module.exports.run = async (client, message, args) => {
                 .addField(`👦 **Usuário**`, '• `portfolio`, `recomendações`, `reputação`...')
                 .addField(`😂 **Diversão**`, '• `bigtext`, `lenny`, `coinflip`, `dados`...')
                 .addField(`🎶 **Música**`, '• `play`, `stop`, `skip`, `playlist`...')
+                .addField(`⚙️ **Staff**`, '• `ban`, `mute`, `chat`, `limpar`...')
                 .setFooter(message.author.tag, message.author.avatarURL)
                 .setTimestamp()
                 .setColor("RANDOM")
@@ -217,13 +218,10 @@ module.exports.run = async (client, message, args) => {
             msg.edit(embeddiversao)
         })
 
-    }) 
-} 
-
+    })
+}
 
 exports.help = {
     name: "ajuda",
-    aliases: [
-        'help'
-    ]
+    aliases: ['help']
 }
