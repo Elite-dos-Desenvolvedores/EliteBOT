@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const Database = require('../../database.js')
 
 exports.run = async (args, message) => {
   let member = message.mentions.users.first() || message.guild.members.get(args[0]).user
