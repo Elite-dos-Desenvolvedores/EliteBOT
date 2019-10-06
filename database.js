@@ -82,7 +82,7 @@ var users = new Schema({
         type: Boolean,
         default: false
     },
-    timevip: {
+    timedoador: {
         type: String,
         default: '0000000000000'
     },
@@ -90,6 +90,10 @@ var users = new Schema({
         type: Boolean,
         default: false
     },
+    doador: {
+        type: Boolean,
+        default: false
+    }
 })
 
 

@@ -1,12 +1,12 @@
-var database = require('../../database.js')
+var database = require('../database.js')
 
-exports.run = (client, message, args, ) => {
+exports.run = (message) => {
 
-    const parceiroRole = message.guild.roles.get('622179166133026817'); // Parceiros
-
+    const doadorRole = message.guild.roles.get('630518001086627871'); // Parceiros
+    
     database.Users.findOne({
         '_id': message.author.id
-    }, function (derro, developer) {
+    }, function (erro, developer) {
         if (developer) {
             if (developer.owner) {
                 if (message.mentions.users.size < 1) {
@@ -16,17 +16,17 @@ exports.run = (client, message, args, ) => {
                         '_id': message.mentions.users.first().id
                     }, function (erro, usuario) {
                         if (usuario) {
-                            if (usuario.parceiro) {
-                                usuario.parceiro = false
+                            if (usuario.doador) {
+                                usuario.doador = false
                                 usuario.save()
-                                message.reply(`O usuário **<@${message.mentions.users.first().id}>** não é mais **parceiro!**`)
-                                member.removeRole(parceiroRole).catch(console.error);
+                                message.reply(`O usuário **<@${message.mentions.users.first().id}>** não é mais um **doador!**`)
+                                member.removeRole(doadorRole).catch(console.error);
                             } else {
-                                usuario.parceiro = true
-                                usuario.timevip = Date.now()
+                                usuario.doador = true
+                                usuario.timedoador = Date.now()
                                 usuario.save()
-                                message.reply(`O usuário **<@${message.mentions.users.first().id}>** se tornou **parceiro!**`)
-                                member.addRole(parceiroRole).catch(console.error);
+                                message.reply(`O usuário **<@${message.mentions.users.first().id}>** agora é um **doador!**`)
+                                member.addRole(doadorRole).catch(console.error);
                             }
                         } else {
                             message.channel.sendMessage('Ocorreu um erro ao executar este comando.')
@@ -40,8 +40,4 @@ exports.run = (client, message, args, ) => {
             message.channel.sendMessage('Ocorreu um erro ao executar este comando.')
         }
     })
-}
-
-exports.help = {
-    name: 'setparceiro'
 }
