@@ -16,8 +16,8 @@ exports.run = async (args, message) => {
   let membro = await Database.Users.findOne({
     '_id': member.id
   })
-  doador.coins -= Number(value)
-  membro.coins += Number(value)
+  doador.coins -= parseInt(value)
+  membro.coins += parseInt(value)
   membro.save()
   doador.save()
 
