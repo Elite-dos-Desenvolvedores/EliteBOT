@@ -21,7 +21,7 @@ exports.run = async (args, message) => {
   membro.save()
   doador.save()
 
-  await message.channel.send(`${message.author} você enviou **${valor}** para ${member} com sucesso.`);
+  await message.channel.send(`${message.author} você enviou **${value}** para ${member} com sucesso.`);
 }
 
 exports.help = {
