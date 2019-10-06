@@ -1,9 +1,7 @@
 var database = require('../../database.js')
 
-exports.run = (message) => {
-
-    const doadorRole = message.guild.roles.get('630518001086627871'); // Parceiros
-    
+exports.run = (client, message, args) => {
+    const doadorRole = message.guild.roles.get('630518001086627871'); // Doador
     database.Users.findOne({
         '_id': message.author.id
     }, function (erro, developer) {

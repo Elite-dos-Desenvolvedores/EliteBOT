@@ -1,6 +1,6 @@
 var database = require('../../database.js')
 
-exports.run = (client, message, args, ) => {
+exports.run = (client, message, args) => {
 
     const parceiroRole = message.guild.roles.get('622179166133026817'); // Parceiros
 

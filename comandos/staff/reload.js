@@ -28,7 +28,6 @@ exports.run = (client, message, args) => {
     });
 };
 
-
 exports.help = {
     name: 'reload',
     description: 'Reinicia um comando.',
