@@ -9,6 +9,8 @@ exports.run = async (client, message, args) => {
   if (!member) return message.reply("mencione um usuário para enviar um pagamento.");
   if (member.id === message.author.id) return message.reply("você não pode fazer um pagamento para você mesmo!");
   if (isNaN(args[1])) return message.reply('valor de coins inválido, insira um valor válido');
+  if (parseInt(valor) <= 0) return message.reply('o valor tem que ser maior que 0.');
+  
   let doador = await Database.Users.findOne({
     '_id': message.author.id
   });
