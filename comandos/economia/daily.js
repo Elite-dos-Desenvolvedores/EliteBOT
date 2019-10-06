@@ -15,9 +15,9 @@ exports.run = (client, message, args ) => {
         documento.coins += valor
         documento.dailytime = Date.now()
         documento.save()
-        message.channel.reply(`você recebeu ${valor} coins`)
+        message.channel.send(`Você recebeu ${valor} coins`)
       } else {
-        message.channel.reply(`você só pode pegar seus coins diários daqui ${tempo}`)
+        message.channel.send(`Você só pode pegar seus coins diários daqui ${tempo}`)
       } 
     } else {
        message.channel.send("Ocorreu um erro ao executar o comando...")
