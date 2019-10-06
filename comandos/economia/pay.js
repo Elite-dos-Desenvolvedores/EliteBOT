@@ -7,6 +7,7 @@ exports.run = async (args, message) => {
   let value = args[1]
   if (Number.isNaN(value)) return message.reply("insira um valor númerico.")
   if (isNaN(value) || Number.parseInt(value) < 0) return message.reply('valor de coins inválido, insira um valor válido');
+  console.log(value)
   let doador = await database.Users.findOne({
     '_id': message.author.id
   })
