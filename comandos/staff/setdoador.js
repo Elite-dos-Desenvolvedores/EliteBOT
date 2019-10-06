@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
         if (developer) {
             if (developer.owner) {
                 if (message.mentions.users.size < 1) {
-                    message.channel.sendMessage('Por favor, mencione o usuário.')
+                    message.channel.send('Por favor, mencione o usuário.')
                 } else {
                     database.Users.findOne({
                         '_id': message.mentions.users.first().id
@@ -18,16 +18,16 @@ exports.run = (client, message, args) => {
                                 usuario.doador = false
                                 usuario.save()
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>** não é mais um **doador!**`)
-                                usuario.removeRole(doadorRole).catch(console.error);
+                                message.member.removeRole(doadorRole).catch(console.error);
                             } else {
                                 usuario.doador = true
                                 usuario.timedoador = Date.now()
                                 usuario.save()
                                 message.reply(`O usuário **<@${message.mentions.users.first().id}>** agora é um **doador!**`)
-                                usuario.addRole(doadorRole).catch(console.error);
+                                message.member.addRole(doadorRole).catch(console.error);
                             }
                         } else {
-                            message.channel.sendMessage('Ocorreu um erro ao executar este comando.')
+                            message.channel.send('Ocorreu um erro ao executar este comando.')
                         }
                     })
                 }
