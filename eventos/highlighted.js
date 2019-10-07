@@ -1,7 +1,9 @@
 const Discord = require("discord.js");
 const config = require("../comandos/config.json")
 
-/* Event handlers */
+
+exports.name = 'highlighted';
+
 
 /** Caches messages upon connection to discord */
 function onReady() {
