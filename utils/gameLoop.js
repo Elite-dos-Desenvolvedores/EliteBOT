@@ -52,22 +52,22 @@ const presences = [
 
 /**
  * @callback DiscordRichPresenceSupplier
- * @param {Client} client - ...
- * @returns {DiscordRichPresenceGame} - ...
+ * @param {Client} client
+ * @returns {DiscordRichPresenceGame}
  */
 
 /**
  * @typedef DiscordRichPresence
  * @type {object}
- * @property {DiscordRichPresenceGame} game - an ID.
+ * @property {DiscordRichPresenceGame} game - The game presence.
  */
 
 /**
  * @typedef DiscordRichPresenceGame
  * @type {object}
- * @property {string} name - an ID.
- * @property {string} [url] - your name.
- * @property {number} type - your age.
+ * @property {string} name - The game name.
+ * @property {string} [url] - The url.
+ * @property {number} type - The type of the game.
  */
 
  module.exports.run = run;
