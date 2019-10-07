@@ -150,7 +150,7 @@ exports.run = async (client, message, args, queue) => {
     const dispatcher = serverQueue.connection.playStream(yt(song.url))
       .on('end', reason => {
         if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-        else console.log("Erro" + reason);
+        else console.log("Erro " + reason);
         serverQueue.songs.shift();
         setTimeout(() => {
           play(guild, serverQueue.songs[0]);
