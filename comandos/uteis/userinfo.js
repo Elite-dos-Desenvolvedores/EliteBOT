@@ -87,6 +87,25 @@ exports.run = (client, message, args) => {
 
             if (!documento) return message.channel.send(erross).then(msg => msg.delete(8000))
 
+            const noreps = new Discord.RichEmbed()
+                .setDescription(`<@${member.user.id}>`)
+                .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL)
+                .setColor(randomColor)
+                .setFooter(`ID: ${member.user.id}`)
+                .setThumbnail(member.user.displayAvatarURL)
+                .setTimestamp()
+                .addField("Status", `${status[member.user.presence.status]}`, true)
+                .addField('Entrou em: ', `${moment(member.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+                .addField("Conta criada em: ", `${moment(member.user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+                .addField(`Cargo [${member.roles.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).length}]`, `${member.roles.filter(r => r.id !== message.guild.id).map(roles => `<@&${roles.id }>`).join(" **|** ") || "Nenhum cargo"}`)
+                .addField("Level", `${documento.level}`, true)
+                .addField("XP", `${documento.xp}`, true)
+                .addField("Portfolio", `${documento.portfolio}`, true)
+                .addField("Reputação: ", `0`, true)
+                .addField("Coins: ", `${documento.coins}`, true);
+
+            if (!doc) return message.channel.send(noreps)
+
             const embed = new Discord.RichEmbed()
                 .setDescription(`<@${member.user.id}>`)
                 .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL)
