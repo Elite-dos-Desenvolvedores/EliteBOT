@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 
 const validate = (color) => {
     if (!color || typeof color !== 'string') return false;
-    color = color.replace('#', '');
 
     switch (color.length) {
         case 3:
@@ -27,7 +26,7 @@ exports.run = async (client, message, args) => {
         if (!args[0]) return message.channel.send('Você precisa informar a cor em HEX');
         if (!validate(args.join(' '))) return message.reply('Essa não é uma cor HEX valida!');
 
-        message.channel.send(new Discord.RichEmbed().setColor(args[0]).setThumbnail(`https://www.webpagefx.com/web-design/color-picker/${args[0]}`).addField(`**HEX**: ${args[0]}`, `**RGB**: rgb(${r},${g},${b})`).setTimestamp());
+        message.channel.send(new Discord.RichEmbed().setColor(`#${args[0]}`).setThumbnail(`https://www.webpagefx.com/web-design/color-picker/${args[0]}`).addField(`**HEX**: ${args[0]}`, `**RGB**: rgb(${r},${g},${b})`).setTimestamp());
     } catch (err) {
         message.channel.send('Aconteceu um erro!\n' + err).catch();
     }
