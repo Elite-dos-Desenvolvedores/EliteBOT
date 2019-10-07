@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const config = require("./comandos/config.js")
+const config = require("../comandos/config.json")
 
 /* Event handlers */
 
