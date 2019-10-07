@@ -21,7 +21,7 @@ function start() {
     loadCommands('./comandos');
 
     console.log(c.cyan('Conectando o bot...'));
-    client.login(client.c.token);
+    client.login(client.config.token);
 }
 
 /**
