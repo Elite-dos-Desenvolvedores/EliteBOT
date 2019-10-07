@@ -5,7 +5,7 @@ const c = require('colors');
 
 client.Database = require('./database.js');
 client.Discord = require('discord.js');
-client.c = require('./comandos/config.json');
+client.config = require('./comandos/config.json');
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
