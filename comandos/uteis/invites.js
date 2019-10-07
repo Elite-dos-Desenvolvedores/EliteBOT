@@ -2,12 +2,7 @@ const Discord = require("discord.js");
 const arraySort = require("array-sort");
 const t = require("table");
 
-run({
-    message,
-    buildMessage,
-    client,
-    args
-}) {
+exports.run = (message, buildMessage, client, args) => {
     //if (!message.guild.members.get(client.user.id).hasPermission('ADMINISTRATOR') && !message.guild.members.get(client.user.id).hasPermission('MANAGE_GUILD')) return message.reply(language.invitersPerm)
     message.guild.fetchInvites().then(a => {
         var u = []
