@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args) => {
         .addField(`👦 **Usuário**`, '• `portfolio`, `recomendações`, `reputação`...')
         .addField(`😂 **Diversão**`, '• `bigtext`, `lenny`, `coinflip`, `dados`...')
         .addField(`🎶 **Música**`, '• `play`, `stop`, `skip`, `playlist`...')
-        .addField(`⚙️ **Staff**`, '• `ban`, `mute`, `chat`, `limpar`...')
+        .addField(`🔧 **Staff**`, '• `ban`, `mute`, `chat`, `limpar`...')
         .setFooter(message.author.tag, message.author.avatarURL)
         .setTimestamp()
         .setColor('RANDOM')
@@ -38,7 +38,7 @@ module.exports.run = async (client, message, args) => {
         await msg.react('👦')
         await msg.react('😂')
         await msg.react('🎶')
-        await msg.react('⚙️')
+        await msg.react('🔧')
         await msg.react("↩")
 
 
@@ -47,7 +47,7 @@ module.exports.run = async (client, message, args) => {
         const usuario = (reaction, user) => reaction.emoji.name === '👦' && user.id === message.author.id;
         const diversao = (reaction, user) => reaction.emoji.name === '😂' && user.id === message.author.id;
         const musica = (reaction, user) => reaction.emoji.name === '🎶' && user.id === message.author.id;
-        const staff = (reaction, user) => reaction.emoji.name === '⚙️' && user.id === message.author.id;
+        const staff = (reaction, user) => reaction.emoji.name === '🔧' && user.id === message.author.id;
 
         const back = (reaction, user) => reaction.emoji.name === "↩" && user.id === message.author.id;
 
@@ -70,7 +70,7 @@ module.exports.run = async (client, message, args) => {
                 .addField(`👦 **Usuário**`, '• `portfolio`, `recomendações`, `reputação`...')
                 .addField(`😂 **Diversão**`, '• `bigtext`, `lenny`, `coinflip`, `dados`...')
                 .addField(`🎶 **Música**`, '• `play`, `stop`, `skip`, `playlist`...')
-                .addField(`⚙️ **Staff**`, '• `ban`, `mute`, `chat`, `limpar`...')
+                .addField(`🔧 **Staff**`, '• `ban`, `mute`, `chat`, `limpar`...')
                 .setFooter(message.author.tag, message.author.avatarURL)
                 .setTimestamp()
                 .setColor("RANDOM")
@@ -195,7 +195,7 @@ module.exports.run = async (client, message, args) => {
         staffL.on('collect', r => {
             const embeddiversao = new Discord.RichEmbed()
                 .setAuthor(`${message.guild.name} - Ajuda`)
-                .setDescription(`⚙️ **Staff**
+                .setDescription(`🔧 **Staff**
                         
                 !ban \`<usuário>\` \`<razão>\` - Bane um usuário.
                 !mute \`<usuário>\` \`<tempo>\` \`<razão>\` - Muta um usuário por certo tempo.
