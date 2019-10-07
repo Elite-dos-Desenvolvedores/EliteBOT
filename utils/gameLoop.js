@@ -1,20 +1,73 @@
-exports.run = async (client) =>{
-    const sleep = time => new Promise(resolve => {
-        setTimeout(resolve, time)
-    })
-    var i;
-    console.log("O loop presence foi ativado!")
+const Client = require('discord.js').Client;
 
-    for (i=0; i<10;){
-        client.user.setPresence({ game: { name: `Seja parte da Elite!`, url: "https://discord.gg/EhjgQ24", type: 1} });
-        await sleep(60000)
-        client.user.setPresence({ game: { name: "Para saber meus comandos digite !ajuda", type: 0 } });
-        await sleep(60000)
-        client.user.setPresence({ game: { name: `${client.users.size} usuários nesta comunidade! YAY`, type: 3} });
-        await sleep(60000)
-        client.user.setPresence({ game: { name: `Krunker com a galera! :)`, type: 3} });
-        await sleep(60000)
-        client.user.setPresence({ game: { name: `Meu criador é o Vitagliano#7027`, url: "https://twitter.com/gbrlrusso", type: 3} });
-        await sleep(60000)
+let currentPresence = 0;
+/**
+ * 
+ * @param {Client} client 
+ */
+async function run(client) {
+    let presence = presences[currentPresence];
+    if(typeof presence === 'function') {
+        presence = presence(client);
     }
+
+    console.log(`Updating presence to '${presence.name}'`);
+    client.user.setPresence({
+        game: presence,
+        status: 'online'
+    });
+
+    currentPresence++;
+    if (currentPresence >= presences.length) {
+        currentPresence = 0;
+    }
+
+    setTimeout(() => run(client), 60000);
 }
+
+/**
+ * @type {(DiscordRichPresenceGame|DiscordRichPresenceSupplier)[]}
+ */
+const presences = [
+    {
+        name: 'Seja parte da Elite!',
+        url: 'https://discord.gg/EhjgQ24',
+        type: 1
+    }, {
+        name: 'Para saber meus comandos digite !ajuda',
+        type: 0
+    }, 
+    (client) => ({
+        name: `${client.users.size} usuários nesta comunidade! YAY`,
+        type: 3
+    }), {
+        name: 'Krunker com a galera! :)',
+        type: 3
+    }, {
+        name: 'Meu criador é o Vitagliano#7027',
+        url: 'https://twitter.com/gbrlrusso',
+        type: 1
+    }
+];
+
+/**
+ * @callback DiscordRichPresenceSupplier
+ * @param {Client} client - ...
+ * @returns {DiscordRichPresenceGame} - ...
+ */
+
+/**
+ * @typedef DiscordRichPresence
+ * @type {object}
+ * @property {DiscordRichPresenceGame} game - an ID.
+ */
+
+/**
+ * @typedef DiscordRichPresenceGame
+ * @type {object}
+ * @property {string} name - an ID.
+ * @property {string} [url] - your name.
+ * @property {number} type - your age.
+ */
+
+ module.exports.run = run;
