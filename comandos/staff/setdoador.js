@@ -1,10 +1,10 @@
 var database = require('../../database.js')
 
 exports.run = (client, message, args) => {
-
+    
     database.Users.findOne({
         '_id': message.author.id
-    }, function (derro, developer) {
+    }, function (erro, developer) {
         if (developer) {
             if (developer.owner) {
                 if (message.mentions.users.size < 1) {
@@ -14,17 +14,17 @@ exports.run = (client, message, args) => {
                         '_id': message.mentions.users.first().id
                     }, function (erro, usuario) {
                         if (usuario) {
-                            if (usuario.parceiro) {
-                                usuario.parceiro = false
+                            if (usuario.doador) {
+                                usuario.doador = false
                                 usuario.save()
-                                message.reply(`O usuário **<@${message.mentions.users.first().id}>** não é mais **parceiro!**`)
-                                message.mentions.members.first().removeRole('622179166133026817').catch(console.error);
+                                message.reply(`O usuário **<@${message.mentions.users.first().id}>** não é mais um **doador!**`)
+                                message.mentions.members.first().removeRole('630518001086627871').catch(console.error);
                             } else {
-                                usuario.parceiro = true
-                                usuario.timevip = Date.now()
+                                usuario.doador = true
+                                usuario.timedoador = Date.now()
                                 usuario.save()
-                                message.reply(`O usuário **<@${message.mentions.users.first().id}>** se tornou **parceiro!**`)
-                                message.mentions.members.first().addRole('622179166133026817').catch(console.error);
+                                message.reply(`O usuário **<@${message.mentions.users.first().id}>** agora é um **doador!**`)
+                                message.mentions.members.first().addRole('630518001086627871').catch(console.error);
                             }
                         } else {
                             message.channel.send('Ocorreu um erro ao executar este comando.')
@@ -41,5 +41,5 @@ exports.run = (client, message, args) => {
 }
 
 exports.help = {
-    name: 'setparceiro'
+    name: 'setdoador'
 }

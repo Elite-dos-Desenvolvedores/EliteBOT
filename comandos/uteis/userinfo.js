@@ -68,46 +68,66 @@ exports.run = (client, message, args) => {
     }
 
 
-    client.Database.Reps.findOne({
-        "_id": member.user.id
-    })
+
 
 
     client.Database.Users.findOne({
         "_id": member.user.id
     }, function (erro, documento) {
-        const erross = new Discord.RichEmbed()
-            .setAuthor(`${member.user.tag}`, client.user.avatarURL)
-            .setDescription(`${message.author}, o usuario não possui um perfil registrado.`)
-            .setTimestamp()
-            .setColor("RANDOM")
-            .setFooter(message.author.tag, message.author.avatarURL)
+        client.Database.Reps.findOne({
+            "_id": member.user.id
+        }, function (erro, doc) {
 
-        if (!documento) return message.channel.send(erross).then(msg => msg.delete(8000))
+            const erross = new Discord.RichEmbed()
+                .setAuthor(`${member.user.tag}`, client.user.avatarURL)
+                .setDescription(`${message.author}, o usuario não possui um perfil registrado.`)
+                .setTimestamp()
+                .setColor("RANDOM")
+                .setFooter(message.author.tag, message.author.avatarURL)
 
+            if (!documento) return message.channel.send(erross).then(msg => msg.delete(8000))
 
+            const noreps = new Discord.RichEmbed()
+                .setDescription(`<@${member.user.id}>`)
+                .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL)
+                .setColor(randomColor)
+                .setFooter(`ID: ${member.user.id}`)
+                .setThumbnail(member.user.displayAvatarURL)
+                .setTimestamp()
+                .addField("Status", `${status[member.user.presence.status]}`, true)
+                .addField('Entrou em: ', `${moment(member.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+                .addField("Conta criada em: ", `${moment(member.user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+                .addField(`Cargo [${member.roles.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).length}]`, `${member.roles.filter(r => r.id !== message.guild.id).map(roles => `<@&${roles.id }>`).join(" **|** ") || "Nenhum cargo"}`)
+                .addField("Level", `${documento.level}`, true)
+                .addField("XP", `${documento.xp}`, true)
+                .addField("Portfolio", `${documento.portfolio}`, true)
+                .addField("Reputação: ", `0`, true)
+                .addField("Coins: ", `${documento.coins}`, true);
 
-        const embed = new Discord.RichEmbed()
-            .setDescription(`<@${member.user.id}>`)
-            .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL)
-            .setColor(randomColor)
-            .setFooter(`ID: ${member.user.id}`)
-            .setThumbnail(member.user.displayAvatarURL)
-            .setTimestamp()
-            .addField("Status", `${status[member.user.presence.status]}`, true)
-            .addField('Entrou em: ', `${moment(member.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
-            .addField("Conta criada em: ", `${moment(member.user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
-            .addField(`Cargo [${member.roles.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).length}]`, `${member.roles.filter(r => r.id !== message.guild.id).map(roles => `<@&${roles.id }>`).join(" **|** ") || "Nenhum cargo"}`)
-            .addField("Level", `${documento.level}`, true)
-            .addField("XP", `${documento.xp}`, true)
-            .addField("Portfolio", `${documento.portfolio}`, true)
-            .addField("Reputação: ", `${documento.reps}`, true)
-            .addField("Coins: ", `${documento.coins}`, true);
+            if (!doc) return message.channel.send(noreps)
 
-        message.channel.send({
-            embed
-        });
+            const embed = new Discord.RichEmbed()
+                .setDescription(`<@${member.user.id}>`)
+                .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL)
+                .setColor(randomColor)
+                .setFooter(`ID: ${member.user.id}`)
+                .setThumbnail(member.user.displayAvatarURL)
+                .setTimestamp()
+                .addField("Status", `${status[member.user.presence.status]}`, true)
+                .addField('Entrou em: ', `${moment(member.joinedAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+                .addField("Conta criada em: ", `${moment(member.user.createdAt).format("dddd, MMMM Do YYYY, HH:mm:ss")}`, true)
+                .addField(`Cargo [${member.roles.filter(r => r.id !== message.guild.id).map(roles => `\`${roles.name}\``).length}]`, `${member.roles.filter(r => r.id !== message.guild.id).map(roles => `<@&${roles.id }>`).join(" **|** ") || "Nenhum cargo"}`)
+                .addField("Level", `${documento.level}`, true)
+                .addField("XP", `${documento.xp}`, true)
+                .addField("Portfolio", `${documento.portfolio}`, true)
+                .addField("Reputação: ", `${doc.reps}`, true)
+                .addField("Coins: ", `${documento.coins}`, true);
 
+            message.channel.send({
+                embed
+            });
+
+        })
     })
 }
 exports.help = {

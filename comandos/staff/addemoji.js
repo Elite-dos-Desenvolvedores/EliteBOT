@@ -33,7 +33,6 @@ exports.run = async (client, message, args) => {
                     .setDescription('Parece que essa URL esta invalida, tente novamente usando outra URL.')
                 message.channel.send(embed)
             } else if (emoteSize < 256000) {
-                
                 const embed = new RichEmbed()
                     .setTitle('Arquivo muito grande')
                     .setColor("RANDOM")

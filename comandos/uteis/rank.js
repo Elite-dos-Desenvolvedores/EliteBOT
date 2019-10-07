@@ -1,21 +1,39 @@
+const Database = require("../../database.js");
 const Discord = require('discord.js')
 
-exports.run = async (client, message, args) => {
-    message.delete()
+exports.run = (client, message) => {
 
-    client.Database.Users.find({}).sort("-xp").then(docs => {
-        if (!docs[0] || !docs[1] || !docs[2] || !docs[3] || !docs[4]) return message.channel.send(`${message.author}, não temos nenhum usuário no rank atualmente.`)
-        const embed = new Discord.RichEmbed()
-            .setColor("RANDOM")
-            .setAuthor("Rank", client.user.avatarURL)
-            .setDescription(` \n**1º** <@${docs[0]._id}> - lvl. ${docs[0].level} • ${docs[0].xp}xp
-**2º** <@${docs[1]._id}> - lvl. ${docs[1].level} • ${docs[1].xp}xp
-**3º** <@${docs[2]._id}> - lvl. ${docs[2].level} • ${docs[2].xp}xp
-**4º** <@${docs[3]._id}> - lvl. ${docs[3].level} • ${docs[3].xp}xp
-**5º** <@${docs[4]._id}> - lvl. ${docs[4].level} • ${docs[4].xp}xp`)
-            .setFooter(message.author.tag, message.author.avatarURL)
+    Database.Users.find().sort([
+        ['level', 'descending']
+    ]).exec((err, res) => {
+        if (err) console.log(err);
+        let i = 0;
+        let embed = new Discord.RichEmbed()
+            .setTitle("Top **5** - XP")
+            .setDescription('Interaja em nosso bate-papo diariamente para conseguir xp.')
             .setThumbnail(client.user.avatarURL)
+            .setFooter(message.author.tag, message.author.avatarURL)
             .setTimestamp()
+        if (res.length === 0) { //se o resultado for igual a 0
+            embed.setColor("RANDOM");
+            embed.addField("Nenhum usuario no banco de dados encontrado", "Converse mais com outros usuários para aparecer aqui.")
+        } else if (res.length < 10) { // se o resultado menor q 5
+            embed.setColor("RANDOM");
+            for (i = 0; i < res.length; i++) {
+                let member = client.users.get(res[i]._id)
+                if (member) {
+                    embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Level**: ${res[i].level} - **XP**: ${res[i].xp}`);
+                } else {
+                    embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Level**: ${res[i].level} - **XP**: ${res[i].xp}`);
+                }
+            }
+        } else {
+            embed.setColor("RANDOM");
+            for (i = 0; i < 5; i++) {
+                let member = client.users.get(res[i]._id)
+                embed.addField(`**${i + 1}**. ${member.username}#${member.discriminator}`, `**Level**: ${res[i].level} - **XP**: ${res[i].xp}`); //adicionamos na embed o nome e os coins do usuario
+            }
+        }
         message.channel.send(embed)
     })
 }

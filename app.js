@@ -133,20 +133,38 @@ client.on("ready", () => {
     console.log(c.bold('[CONECTADO] ') + c.green('A aplicação foi conectada e estabelecida com sucesso!'))
 })
 
+/**
+ * Load all events in a specific directory.
+ * 
+ * @param {string} dir - The events directory.
+ */
+function loadEvents(dir) {
+    let files = fs.readdirSync(dir);
 
+    for (const file of files) {
+        if(file.split('.').length === 1) {
+            // It's a directory, try to read events there.
+            loadEvents(`${dir}/${file}`);
+            continue;
+        }
 
-fs.readdir("./eventos/", (err, files) => {
-    if (err) return console.error("ERRO: " + err)
+        let events = require(`${dir}/${file}`);
+        if(!Array.isArray(events)) {
+            events = [events]
+        }
 
-    files.forEach(file => {
+        for (const event of events) {
+            if(!event.name || !event.run) {
+                continue;
+            }
 
-        var eventFunction = require(`./eventos/${file}`)
-        var eventName = file.split(".")[0];
-        console.log(`[EVENTO] ${file}` + c.yellow(' Carregado!'))
+            console.log(`[EVENTO] ${event.name}` + c.yellow(' Carregado!'));
 
-        client.on(eventName, (...args) => eventFunction.run(client, ...args))
-    })
-})
+            client.on(event.name, (...args) => event.run(client, ...args));
+        }
+    }
+}
 
+loadEvents('./eventos/');
 
 client.login(config.token);
