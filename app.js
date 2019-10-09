@@ -6,7 +6,7 @@ const fileUtils = require('./utils/fileUtils');
 
 client.Database = require('./database.js');
 client.Discord = require('discord.js');
-config = require('./comandos/config.json');
+config = require('./config');
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
