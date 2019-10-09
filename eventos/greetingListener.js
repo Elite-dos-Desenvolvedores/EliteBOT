@@ -1,17 +1,26 @@
 const config = require('../config');
 
-const greetingChannel = client.channels.get(config.channel.greeting);
+let greetingChannel;
 
 module.exports = [
     {
+        name: "ready",
+        run: (client) => {
+            greetingChannel = client.channels.get(config.channel.greeting);
+        }
+    }, {
         name: 'guildMemberAdd',
         run: (client, member) => {
-            greetingChannel.send(`${member.user} entrou no servidor!`);
+            if (greetingChannel) {
+                greetingChannel.send(`${member.user} entrou no servidor!`);
+            }
         }
     }, {
         name: 'guildMemberRemove',
         run: (client, member) => {
-            greetingChannel.send(`${member.user} saiu do servidor!`);
+            if (greetingChannel) {
+                greetingChannel.send(`${member.user} saiu do servidor!`);
+            }
         }
     }
 ];
