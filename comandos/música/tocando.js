@@ -9,9 +9,7 @@ const opus = require("opusscript");
 const gyp = require("node-gyp");
 
 exports.run = async (client, message, args, queue) => {
-  const p = client.emojis.find("name", "play")
-  const s = client.emojis.find("name", "stop")
-  const pa = client.emojis.find("name", "pause")
+
 
   const args1 = message.content.split(' ');
   const searchString = args1.slice(1).join(' ');
@@ -24,7 +22,7 @@ exports.run = async (client, message, args, queue) => {
     ▫ Música postada por: **${serverQueue.songs[0].creator}**
     ▫ Duração: **${serverQueue.songs[0].durationh}:0${serverQueue.songs[0].durationm}:0${serverQueue.songs[0].durations}**`)
     .setFooter(message.author.tag, message.author.avatarURL)
-    .setThumbnail('https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+    .setThumbnail('https://i.imgur.com/3mwi1hl.png')
     .setColor('RANDOM')
 
   // .setDescription(`:notes: Currently Playing: **${serverQueue.songs[0].title}**`);

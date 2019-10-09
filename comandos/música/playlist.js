@@ -8,9 +8,7 @@ const YouTube = require('simple-youtube-api');
 const youtube = new YouTube('AIzaSyAntMu3piyFukdVknRsh5kO09dr1pr5hJw');
 
 exports.run = async (client, message, args, queue) => {
-  const p = client.emojis.find("name", "play")
-  const s = client.emojis.find("name", "stop")
-  const pa = client.emojis.find("name", "pause")
+
 
   const args1 = message.content.split(' ');
   const searchString = args1.slice(1).join(' ');
@@ -22,7 +20,7 @@ exports.run = async (client, message, args, queue) => {
 
   // serverQueue.songs.map(song => console.log(song))
   const queueInfo = new Discord.RichEmbed()
-    .setTitle("Fila de músicas:", 'https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+    .setTitle("Fila de músicas:", 'https://i.imgur.com/3mwi1hl.png')
     .setDescription(`${serverQueue.songs.map(song => `**•** ${song.title} por \`[${song.author}]\` `).slice(0, 16).join('\n')}`)
     .setFooter("Tocando agora: " + serverQueue.songs[0].title, message.author.avatarURL)
     .setColor('RANDOM')
