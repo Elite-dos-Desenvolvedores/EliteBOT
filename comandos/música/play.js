@@ -9,9 +9,6 @@ const gyp = require("node-gyp");
 
 exports.run = async (client, message, args, queue) => {
   message.delete()
-  const p = client.emojis.find("name", "play")
-  const s = client.emojis.find("name", "stop")
-  const pa = client.emojis.find("name", "pause")
 
   const args1 = message.content.split(' ');
   const searchString = args1.slice(1).join(' ');
@@ -53,7 +50,7 @@ exports.run = async (client, message, args, queue) => {
 
         const embed = new Discord.RichEmbed()
           .setDescription(videos.map(video2 => `**${++index} -** ${video2.title} `).join('\n'))
-          .setAuthor("Selecione sua música: ", 'https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+          .setAuthor("Selecione sua música: ", 'https://i.imgur.com/3mwi1hl.png')
           .setColor('RANDOM')
           .setFooter("Para escutar a música desejada, selecione a musica de 1 à 5.", message.author.avatarURL)
         let msgtoDelete = await message.channel.send({
@@ -150,7 +147,7 @@ exports.run = async (client, message, args, queue) => {
     const dispatcher = serverQueue.connection.playStream(yt(song.url))
       .on('end', reason => {
         if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-        else console.log("Erro" + reason);
+        else console.log("Erro " + reason);
         serverQueue.songs.shift();
         setTimeout(() => {
           play(guild, serverQueue.songs[0]);
@@ -172,7 +169,7 @@ exports.run = async (client, message, args, queue) => {
 	▫ Música postada por: **${song.creator}**
 ▫ Duração: **${song.durationh}:0${song.durationm}:0${durations}**`)
             .setFooter("© EdD", client.user.avatarURL)
-            .setThumbnail('https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+            .setThumbnail('https://i.imgur.com/3mwi1hl.png')
             .setColor('RANDOM')
           return serverQueue.textChannel.send(embed1);
         }
@@ -186,7 +183,7 @@ exports.run = async (client, message, args, queue) => {
 ▫ Música postada por: **${song.creator}**
 ▫ Duração: **${song.durationh}:${song.durationm}:0${durations}**`)
             .setFooter("© EdD", client.user.avatarURL)
-            .setThumbnail('https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+            .setThumbnail('https://i.imgur.com/3mwi1hl.png')
             .setColor('RANDOM')
 
           return serverQueue.textChannel.send(embed2);
@@ -201,7 +198,7 @@ exports.run = async (client, message, args, queue) => {
 ▫ Música postada por: **${song.creator}**
 ▫ Duração: **${song.durationh}:0${song.durationm}:${durations}**`)
             .setFooter("© EdD", client.user.avatarURL)
-            .setThumbnail('https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+            .setThumbnail('https://i.imgur.com/3mwi1hl.png')
             .setColor('RANDOM')
 
           return serverQueue.textChannel.send(embed3);
@@ -216,7 +213,7 @@ exports.run = async (client, message, args, queue) => {
 ▫ Música postada por: **${song.creator}**
 ▫ Duração: **${song.durationh}:${song.durationm}:${durations}**`)
             .setFooter("© EdD", client.user.avatarURL)
-            .setThumbnail('https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+            .setThumbnail('https://i.imgur.com/3mwi1hl.png')
             .setColor('RANDOM')
 
           return serverQueue.textChannel.send(embed4);
@@ -230,7 +227,7 @@ exports.run = async (client, message, args, queue) => {
 ▫ Música postada por: **${song.creator}**
 ▫ Duração: **${song.durationm}:0${durations}**`)
           .setFooter("© EdD", client.user.avatarURL)
-          .setThumbnail('https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+          .setThumbnail('https://i.imgur.com/3mwi1hl.png')
           .setColor('RANDOM')
 
         return serverQueue.textChannel.send(embed5);
@@ -244,7 +241,7 @@ exports.run = async (client, message, args, queue) => {
 ▫ Música postada por: **${song.creator}**
 ▫ Duração: **${song.durationm}:${durations}**`)
           .setFooter("© EdD", client.user.avatarURL)
-          .setThumbnail('https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+          .setThumbnail('https://i.imgur.com/3mwi1hl.png')
           .setColor('RANDOM')
         return serverQueue.textChannel.send(embed6);
       }
@@ -256,7 +253,7 @@ exports.run = async (client, message, args, queue) => {
 ▫ Música postada por: **${song.creator}**
 ▫ Duração: **0:${durations}**`)
         .setFooter("© EdD", client.user.avatarURL)
-        .setThumbnail('https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+        .setThumbnail('https://i.imgur.com/3mwi1hl.png')
         .setColor('RANDOM')
 
       return serverQueue.textChannel.send(embed7);
@@ -265,7 +262,7 @@ exports.run = async (client, message, args, queue) => {
         .addField("Informações da musica:", `▫ Música: [${song.title}](${song.url})
 ▫ Música postada por: **${song.creator}**`)
         .setFooter("© EdD", client.user.avatarURL)
-        .setThumbnail('https://cdn.discordapp.com/emojis/465209209479495690.png?v=1')
+        .setThumbnail('https://i.imgur.com/3mwi1hl.png')
         .setColor('RANDOM')
 
       return serverQueue.textChannel.send(embed8);

@@ -5,7 +5,7 @@ const c = require('colors');
 
 client.Database = require('./database.js');
 client.Discord = require('discord.js');
-client.c = require('./comandos/config.json');
+config = require('./comandos/config.json');
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -21,7 +21,7 @@ function start() {
     loadCommands('./comandos');
 
     console.log(c.cyan('Conectando o bot...'));
-    client.login(client.c.token);
+    client.login(config.token);
 }
 
 /**

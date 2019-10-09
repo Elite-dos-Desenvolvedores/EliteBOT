@@ -10,7 +10,6 @@ exports.run = (client, message, args) => {
             .setColor('RANDOM')
     message.channel.send({embed})
 }
-
 exports.help = {
     name: 'avatar',
     description: 'Mostra o avatar de um usuário',
