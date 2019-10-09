@@ -28,14 +28,13 @@ async function onMessage(client, message) {
         return;
     }
     
-    let args = message.content.split(' ');
+    const args = message.content.split(' ');
     const cmd = args.shift();
-    args = args.slice(1);
 
-    var command = getCommand(client, cmd);
+    const command = getCommand(client, cmd);
     if (command) {
         message.delete(1000).catch(err => {});
-        
+
         if (cooldown.has(message.author.id)) {
             const timeSinceLastCommand = Date.now() - cooldown.get(message.author.id);
             if (timeSinceLastCommand < config.command.cooldown) {
