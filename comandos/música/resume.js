@@ -7,9 +7,7 @@ const youtube = new YouTube('AIzaSyAntMu3piyFukdVknRsh5kO09dr1pr5hJw');
 const opus = require("opusscript");
 const gyp = require("node-gyp");
 exports.run = async (client, message, args, queue) => {
-  const p = client.emojis.find("name", "play")
-  const s = client.emojis.find("name", "stop")
-  const pa = client.emojis.find("name", "pause")
+
 
   const args1 = message.content.split(' ');
   const searchString = args1.slice(1).join(' ');

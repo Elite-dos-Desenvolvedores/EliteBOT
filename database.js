@@ -4,7 +4,8 @@ const client = new Discord.Client();
 const config = require('./comandos/config.json')
 
 mongoose.connect(config.db, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }, (err) => {
     if (err) return console.log(`Erro ao conectar no database!\n${err}`)
     console.log(`Conectado ao BANCO DE DADOS!`)
@@ -49,6 +50,22 @@ var users = new Schema({
         type: Number,
         default: 0
     },
+    name: {
+        type: String,
+        default: "-/-"
+    },
+    age: {
+        type: String,
+        default: "-/-"
+    },
+    aboutme: {
+        type: String,
+        default: "-/-"
+    },
+    favelangs: {
+        type: String,
+        default: "-/-"
+    },
     portfolio: {
         type: String,
         default: "-/-"
@@ -65,10 +82,18 @@ var users = new Schema({
         type: Boolean,
         default: false
     },
-    timevip: {
+    timedoador: {
         type: String,
         default: '0000000000000'
     },
+    parceiro: {
+        type: Boolean,
+        default: false
+    },
+    doador: {
+        type: Boolean,
+        default: false
+    }
 })
 
 

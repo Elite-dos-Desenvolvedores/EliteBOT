@@ -3,8 +3,8 @@ const c = require('../config.json')
 exports.run = async (client, message, args) => {
     await message.author.createDM
 
-    const vv = client.emojis.find("name", "checked")
-    const xx = client.emojis.find("name", "unchecked")
+    const vv = client.emojis.find(emoji => emoji.name === 'checked')
+    const xx = client.emojis.find(emoji => emoji.name === 'unchecked')
     message.delete()
     message.channel.send(`${message.author}, informações do seu pedido foi enviada a sua DM.`).then(msg => msg.delete(5000))
 

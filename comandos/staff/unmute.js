@@ -10,20 +10,20 @@ module.exports.run = async (bot, message, args) => {
             return message.channel.send(new Discord.RichEmbed()
                 .setTitle("Uso incorreto do comando")
                 .setDescription("Tente usar ``" + `${c.prefix}${this.help.name} ${this.help.arg}` + "``")
-                .setColor('#FF0000'));
+                .setColor('RANDOM'));
         }
 
         if (unmute.roles.has(muterole.id)) {
             unmute.removeRole(muterole.id);
-            return message.channel.send(new Discord.RichEmbed()
+            return client.channels.get('622533809455497257').send(new Discord.RichEmbed()
                 .setTitle(`**${unmute.displayName}** foi desmutado.`)
-                .setColor("#00FF00")            
+                .setColor("RANDOM")            
                 .setFooter(`Usuário desmutado por ${message.author.username}`)
                 .setTimestamp()); 
         } else {
             return message.channel.send(new Discord.RichEmbed()
                 .setTitle(`**${unmute.displayName}** não está mutado.`)
-                .setColor("#FF0000"));
+                .setColor("RANDOM"));
         }
     }
 }
