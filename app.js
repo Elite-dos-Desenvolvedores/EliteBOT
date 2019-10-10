@@ -2,10 +2,11 @@ const Discord = require('discord.js'); //definindo conexão com discord padrão
 const fs = require('fs'); //Definindo constante fs para inicialização de eventos
 const client = new Discord.Client(); //definindo o bot como um novo client
 const c = require('colors');
+const fileUtils = require('./utils/fileUtils');
 
 client.Database = require('./database.js');
 client.Discord = require('discord.js');
-config = require('./comandos/config.json');
+config = require('./config');
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -30,40 +31,30 @@ function start() {
  * @param {string} dir - The commands directory.
  */
 function loadCommands(dir) {
-    const dirList = dir.split('/');
-    dirList.shift();
-    dirList.shift();
-    const commandCategory = dirList
-        .join('/');
+    for (const dirInfo of fileUtils.searchByExtension(dir, 'js')) {
+        const dirList = dirInfo.directory.split('/');
+        dirList.shift();
+        dirList.shift();
+        const commandCategory = dirList
+            .join('/');
 
-    let files = fs.readdirSync(dir);
-    const commands = [];
-
-    for (const file of files) {
-        if(file.split('.').length === 1) {
-            // It's a directory, try to read commands there.
-            loadCommands(`${dir}/${file}`);
-            continue;
+        for (const file of dirInfo.files) {
+            let cmd = require(file);
+            if(!cmd.help) {
+                // Invalid command.
+                continue;
+            }
+    
+            client.commands.set(cmd.help.name, cmd);
+            if(cmd.help.aliases) {
+                cmd.help.aliases
+                .filter(alias => alias.trim() !== '')
+                .forEach(alias => client.aliases.set(alias, cmd.help.name));
+            }
         }
 
-        let cmd = require(`${dir}/${file}`);
-        if(!cmd.help) {
-            // Invalid command.
-            continue;
-        }
-
-        commands.push(file.split('.').shift());
-
-        client.commands.set(cmd.help.name, cmd);
-        if(cmd.help.aliases) {
-            cmd.help.aliases
-            .filter(alias => alias.trim() !== '')
-            .forEach(alias => client.aliases.set(alias, cmd.help.name));
-        }
-    }
-
-    if(commands.length > 0) {
-        console.log(`[COMANDO] ` + c.yellow('Foram carregados ') + commands.length + c.yellow(' comandos na categoria ') + commandCategory + c.yellow('. [') + commands.join(c.yellow(', ')) + c.yellow(']'));
+        const formatedFiles = dirInfo.files.map(file => file.split('/').pop().split('.').shift())
+        console.log(`[COMANDO] ` + c.yellow('Foram carregados ') + dirInfo.files.length + c.yellow(' comandos na categoria ') + commandCategory + c.yellow('. [') + formatedFiles.join(c.yellow(', ')) + c.yellow(']'));
     }
 }
 
@@ -73,28 +64,22 @@ function loadCommands(dir) {
  * @param {string} dir - The events directory.
  */
 function loadEvents(dir) {
-    let files = fs.readdirSync(dir);
-
-    for (const file of files) {
-        if(file.split('.').length === 1) {
-            // It's a directory, try to read events there.
-            loadEvents(`${dir}/${file}`);
-            continue;
-        }
-
-        let events = require(`${dir}/${file}`);
-        if(!Array.isArray(events)) {
-            events = [events];
-        }
-
-        for (const event of events) {
-            if(!event.name || !event.run) {
-                continue;
+    for (const dirInfo of fileUtils.searchByExtension(dir, 'js')) {
+        for (const file of dirInfo.files) {
+            let events = require(file);
+            if(!Array.isArray(events)) {
+                events = [events];
             }
 
-            console.log(`[EVENTO] ` + c.yellow('O evento ') + event.name + c.yellow(' foi carregado!'));
-
-            client.on(event.name, (...args) => event.run(client, ...args));
+            for (const event of events) {
+                if(!event.name || !event.run) {
+                    continue;
+                }
+    
+                console.log(`[EVENTO] ` + c.yellow('O evento ') + event.name + c.yellow(' foi carregado!'));
+    
+                client.on(event.name, (...args) => event.run(client, ...args));
+            }
         }
     }
 }
