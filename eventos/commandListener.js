@@ -20,16 +20,18 @@ async function onMessage(client, message) {
     if (!message.content.startsWith(config.prefix)) {
         return;
     }
-
-    if(message.channel.id !== config.channel.commands) {
-        message
-            .reply(`utilize o canal <#${config.channel.commands}> para executar um comando!`)
-            .then(msg => msg.delete(5000));
-        return;
-    }
     
     const args = message.content.split(' ');
     const cmd = args.shift();
+
+    if(message.channel.id !== config.channel.commands) {
+        if(cmd !== "!limpar" && cmd !== "!embed" && cmd !== "!chat" && cmd !== "!slowmode" && cmd !== "!langs" && cmd !== "!spacemychannel") {
+            message
+                .reply(`utilize o canal <#${config.channel.commands}> para executar um comando!`)
+                .then(msg => msg.delete(5000));
+            return;
+        }
+    }
 
     const command = getCommand(client, cmd);
     if (command) {
