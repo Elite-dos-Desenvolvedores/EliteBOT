@@ -12,5 +12,13 @@
     "punishChannel": "622533809455497257",
     "youtube": "your yt api key goes here",
     "newsChannel": "622164725664317450",
-    "partnerChannel": "628959326173921311"
+    "partnerChannel": "628959326173921311",
+    "command": {
+        "prefix": "!",
+        "cooldown": 5000
+    },
+    "channel": {
+        "commands": "631597525865857045",
+        "greeting": "631594577484054530"
+    }
 }

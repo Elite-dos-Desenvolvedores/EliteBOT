@@ -25,8 +25,7 @@ exports.run = async (client, message, args) => {
         const pergun1 = new Discord.RichEmbed()
             .setColor("RANDOM")
             .setDescription(`**0%** [\`----------\`] 
-                                    \`\`\`fix 
-                                    #1 - Insira seu nome:\`\`\` `)
+                                    \`\`\`#1 - Insira seu nome:\`\`\` `)
 
         if (a.content.toLowerCase() === "cancelar") return message.author.send('O processo de apresentação foi cancelado.');
         if (a.content.toLowerCase() === "continuar") message.author.send(pergun1)
@@ -57,8 +56,7 @@ exports.run = async (client, message, args) => {
                 const pergun3 = new Discord.RichEmbed()
                     .setColor("RANDOM")
                     .setDescription(`**40%** [\`████------\`] 
-        \`\`\`fix 
-        #3 - Insira uma breve descrição sobre você:\`\`\``)
+        \`\`\`#3 - Insira uma breve descrição sobre você:\`\`\``)
                 message.author.send(pergun3)
 
                 var prg4 = message.author.dmChannel.createMessageCollector(d => d.author.id == message.author.id, {
@@ -72,8 +70,7 @@ exports.run = async (client, message, args) => {
                     const pergun4 = new Discord.RichEmbed()
                         .setColor("RANDOM")
                         .setDescription(`**60%** [\`██████--\`] 
-        \`\`\`fix 
-        #4- Insira suas linguagens favoritas: [Java, Kotlin, Javascript, PHP...]\`\`\``)
+        \`\`\`#4- Insira suas linguagens favoritas: [Java, Kotlin, Javascript, PHP...]\`\`\``)
                     message.author.send(pergun4)
 
                     var prg5 = message.author.dmChannel.createMessageCollector(d => d.author.id == message.author.id, {
@@ -87,8 +84,7 @@ exports.run = async (client, message, args) => {
                         const pergun5 = new Discord.RichEmbed()
                             .setColor("RANDOM")
                             .setDescription(`**80%** [\`████████--\`] 
-        \`\`\`fix 
-        #5 - Insira o link para seu portfolio: [Github ou site] \`\`\``)
+        \`\`\`#5 - Insira o link para seu portfolio: [Github ou site] \`\`\``)
                         message.author.send(pergun5)
 
                         var fim = message.author.dmChannel.createMessageCollector(d => d.author.id == message.author.id, {
@@ -124,8 +120,7 @@ exports.run = async (client, message, args) => {
                             const fimn = new Discord.RichEmbed()
                                 .setColor("RANDOM")
                                 .setDescription(`**100%** [\`██████████\`] 
-        \`\`\`fix
-Sua apresentação foi enviada!\`\`\``)
+        \`\`\`Sua apresentação foi enviada!\`\`\``)
                             message.author.send(fimn)
 
 

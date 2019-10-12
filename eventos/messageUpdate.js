@@ -3,6 +3,10 @@ const c = require('../comandos/config.json');
 
 exports.name = 'messageUpdate';
 exports.run = (oldMessage, newMessage, message) => {
+    if (["discord.gg/", "discordapp.com/invite/", "invite.gg/", "discord.io/", "discord.me/", "discord.plus/", "dis.gd/"].some(invite => message.content.includes(invite) && !message.content.includes("https://discord.gg/EhjgQ24"))) {
+        message.delete().then(message.channel.send(`${message.author} você não pode enviar links de outros servidores aqui!`).then(msg => msg.delete(8000)))
+    }
+
     if (newMessage.channel.type === 'dm') return;
     if (oldMessage.content == newMessage.content) return;
 
