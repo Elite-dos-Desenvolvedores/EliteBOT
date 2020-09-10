@@ -1,2 +1,2 @@
-language = "python3"
+language = "node.js"
 run = "npm start"
