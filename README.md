@@ -35,3 +35,4 @@ Serão aceitas pull requests com códigos limpos e não maliciosos, sempre tendo
 
 ## Ajuda
 Tem alguma dúvida? Entre em nosso discord e converse com a gente: https://discord.gg/cys2Y8
+[![Run on Repl.it](https://repl.it/badge/github/Elite-dos-Desenvolvedores/EliteBOT)](https://repl.it/github/Elite-dos-Desenvolvedores/EliteBOT)
